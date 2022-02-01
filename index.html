@@ -148,6 +148,177 @@
             
 
   
+    <article id="post-Feign——更优雅的远程调用" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+  
+  
+    <h1 itemprop="name">
+	
+	  <a class="article-title" href="/2022/02/01/Feign%E2%80%94%E2%80%94%E6%9B%B4%E4%BC%98%E9%9B%85%E7%9A%84%E8%BF%9C%E7%A8%8B%E8%B0%83%E7%94%A8/" target="_blank">Feign——更优雅的远程调用</a>
+  
+    </h1>
+  
+
+
+  
+  
+<a href="/2022/02/01/Feign%E2%80%94%E2%80%94%E6%9B%B4%E4%BC%98%E9%9B%85%E7%9A%84%E8%BF%9C%E7%A8%8B%E8%B0%83%E7%94%A8/" class="archive-article-date">
+        <time datetime="2022-02-01T14:04:49.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-02-01</time>
+</a>
+
+  
+  
+    
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <h2 id="RestTemplate"><a href="#RestTemplate" class="headerlink" title="RestTemplate"></a>RestTemplate</h2><h3 id="使用方式"><a href="#使用方式" class="headerlink" title="使用方式"></a>使用方式</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">String url = <span class="string">&quot;http://userservice/user/&quot;</span> + order.getUserId();</span><br><span class="line">User user = restTemplate.getForObject(url, User.class);</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="存在问题"><a href="#存在问题" class="headerlink" title="存在问题"></a>存在问题</h3><ol>
+<li>混入字符串URL的定义，代码可读性差，编程体验不统一</li>
+<li>参数复杂的URL难以维护</li>
+</ol>
+<h2 id="Feign的使用"><a href="#Feign的使用" class="headerlink" title="Feign的使用"></a>Feign的使用</h2><h3 id="引入依赖"><a href="#引入依赖" class="headerlink" title="引入依赖"></a>引入依赖</h3><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 引入Feign依赖 --&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.cloud<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-cloud-starter-openfeign<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="在启动类上添加功能开关"><a href="#在启动类上添加功能开关" class="headerlink" title="在启动类上添加功能开关"></a>在启动类上添加功能开关</h3><p>@EnableFeignClients</p>
+<h3 id="编写Feign客户端，做接口声明"><a href="#编写Feign客户端，做接口声明" class="headerlink" title="编写Feign客户端，做接口声明"></a>编写Feign客户端，做接口声明</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@FeignClient(&quot;userservice&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">UserClient</span> </span>&#123;</span><br><span class="line">    <span class="meta">@GetMapping(&quot;/user/&#123;id&#125;&quot;)</span></span><br><span class="line">    <span class="function">User <span class="title">findById</span> <span class="params">(<span class="meta">@PathVariable(&quot;id&quot;)</span> Long id)</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="调用Feign客户端"><a href="#调用Feign客户端" class="headerlink" title="调用Feign客户端"></a>调用Feign客户端</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Service</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">OrderService</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> OrderMapper orderMapper;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> UserClient userClient;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Order <span class="title">queryOrderById</span><span class="params">(Long orderId)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 1.查询订单</span></span><br><span class="line">        Order order = orderMapper.findById(orderId);</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// 2.使用Feign客户端</span></span><br><span class="line">        User user = userClient.findById(order.getUserId());</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 3.封装user对象到oder中</span></span><br><span class="line">        order.setUser(user);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 4.返回</span></span><br><span class="line">        <span class="keyword">return</span> order;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="Feign内部集成了负载均衡"><a href="#Feign内部集成了负载均衡" class="headerlink" title="Feign内部集成了负载均衡"></a>Feign内部集成了负载均衡</h3><h4 id="ribbon开启饥饿加载"><a href="#ribbon开启饥饿加载" class="headerlink" title="ribbon开启饥饿加载"></a>ribbon开启饥饿加载</h4><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">ribbon:</span></span><br><span class="line">  <span class="attr">eager-load:</span></span><br><span class="line">    <span class="attr">enabled:</span> <span class="literal">true</span></span><br><span class="line">    <span class="attr">clients:</span> <span class="comment"># 指定开启饥饿加载的服务名称 </span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">userservice</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="自定义Feign的配置"><a href="#自定义Feign的配置" class="headerlink" title="自定义Feign的配置"></a>自定义Feign的配置</h3><h4 id="方式一：配置文件方式"><a href="#方式一：配置文件方式" class="headerlink" title="方式一：配置文件方式"></a>方式一：配置文件方式</h4><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">feign:</span> </span><br><span class="line">  <span class="attr">client:</span> </span><br><span class="line">    <span class="attr">config:</span></span><br><span class="line">      <span class="attr">default:</span> <span class="comment"># 这里用default就是全局配置，如果写服务名称就是局部生效   例如：userservice: </span></span><br><span class="line">      	<span class="attr">loggerLevel:</span> <span class="string">BASIC</span> </span><br><span class="line">      	<span class="comment"># NONE 不记录日志</span></span><br><span class="line">      	<span class="comment"># BASIC 开始请求的时间、请求结束的时间、请求耗时等基本信息</span></span><br><span class="line">      	<span class="comment"># HEADERS 额外记录请求头、响应头信息 </span></span><br><span class="line">      	<span class="comment"># FULL 额外记录请求体、响应体信息</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="方式二：Java代码方式"><a href="#方式二：Java代码方式" class="headerlink" title="方式二：Java代码方式"></a>方式二：Java代码方式</h4><ol>
+<li><p>先声明一个Bean</p>
+ <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">FeignClientConfiguration</span></span>&#123;</span><br><span class="line">    </span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="keyword">public</span> Logger.<span class="function">Level <span class="title">feignLogLevel</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> Logger.Level.BASIC;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</li>
+<li><p>如果是全局配置，就放到功能开关的注解中（@EnableFeignClients）</p>
+ <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@EnableFeignClients(defaultConfiguration = FeignClientConfiguration.class)</span></span><br></pre></td></tr></table></figure>
+
+</li>
+<li><p>如果是局部配置，就放到@FeignClient注解中</p>
+ <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@FeignClient(value = &#x27;userservice&#x27;, configuration = FeignClientConfiguration.class)</span></span><br></pre></td></tr></table></figure></li>
+</ol>
+<h3 id="Feign的性能优化"><a href="#Feign的性能优化" class="headerlink" title="Feign的性能优化"></a>Feign的性能优化</h3><h4 id="①-Feign底层的客户端实现"><a href="#①-Feign底层的客户端实现" class="headerlink" title="① Feign底层的客户端实现"></a>① Feign底层的客户端实现</h4><ul>
+<li>URLConnection：默认实现，不支持连接池</li>
+<li>Apache HttpClient：支持连接池</li>
+<li>OKHttp：支持连接池</li>
+</ul>
+<h4 id="②-优化Feign的性能主要包括："><a href="#②-优化Feign的性能主要包括：" class="headerlink" title="② 优化Feign的性能主要包括："></a>② 优化Feign的性能主要包括：</h4><ul>
+<li>使用连接池代替默认的URLConnection</li>
+<li>日志级别，最好用basic或者none</li>
+</ul>
+<h4 id="③-连接池配置"><a href="#③-连接池配置" class="headerlink" title="③ 连接池配置"></a>③ 连接池配置</h4><ol>
+<li><p>引入依赖</p>
+ <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- httpClient --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>io.github.openfeign<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>feign-httpclient<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure></li>
+<li><p>开启配置</p>
+ <figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">feign:</span> </span><br><span class="line">  <span class="attr">httpclient:</span> </span><br><span class="line">    <span class="attr">enabled:</span> <span class="literal">true</span></span><br><span class="line">    <span class="attr">max-connections:</span> <span class="number">200</span> <span class="comment"># 最大连接数</span></span><br><span class="line">    <span class="attr">max-connections-per-route:</span> <span class="number">50</span> <span class="comment"># 单个路径</span></span><br></pre></td></tr></table></figure></li>
+</ol>
+<h3 id="Feign的最佳实践"><a href="#Feign的最佳实践" class="headerlink" title="Feign的最佳实践"></a>Feign的最佳实践</h3><h4 id="方式一（继承）"><a href="#方式一（继承）" class="headerlink" title="方式一（继承）"></a>方式一（继承）</h4><ul>
+<li>概念：给消费者的FeignClient和提供者的controller定义统一的父接口作为标准</li>
+<li><img src="/2022/02/01/Feign%E2%80%94%E2%80%94%E6%9B%B4%E4%BC%98%E9%9B%85%E7%9A%84%E8%BF%9C%E7%A8%8B%E8%B0%83%E7%94%A8/Feign-1.png" alt="image20220201222348"></li>
+<li>问题：<ul>
+<li>一般不推荐在服务与客户端之间共用一个接口，会造成代码的紧耦合（从API层面就耦合了）</li>
+<li>方法参数无法继承（SpringMVC不支持这种情况）</li>
+</ul>
+</li>
+<li>优势：<ul>
+<li>体现了面向契约编程的思想</li>
+<li><a target="_blank" rel="noopener" href="https://www.cnblogs.com/steady/archive/2012/05/03/2481024.html%EF%BC%88%E8%BD%AC%E8%BD%BD%EF%BC%9A%E6%B5%85%E8%B0%88%E5%A5%91%E7%BA%A6%E5%BC%8F%E7%BC%96%E7%A8%8B%EF%BC%89">https://www.cnblogs.com/steady/archive/2012/05/03/2481024.html（转载：浅谈契约式编程）</a></li>
+</ul>
+</li>
+</ul>
+<h4 id="方式二（抽取）"><a href="#方式二（抽取）" class="headerlink" title="方式二（抽取）"></a>方式二（抽取）</h4><ul>
+<li><p>概念：将FeignClient抽取为独立模块，并且把接口有关的POJO、默认的Feign配置都放到这个模块中，提供给所有消费者使用</p>
+</li>
+<li><p><img src="/2022/02/01/Feign%E2%80%94%E2%80%94%E6%9B%B4%E4%BC%98%E9%9B%85%E7%9A%84%E8%BF%9C%E7%A8%8B%E8%B0%83%E7%94%A8/Feign-2.png" alt="image20220201222937"></p>
+</li>
+<li><p>问题：</p>
+<ul>
+<li>会有大量方法的冗余，我只需要一个服务的调用方法，你却配置了全部API</li>
+</ul>
+</li>
+<li><p>优势：</p>
+<ul>
+<li>低耦合</li>
+</ul>
+</li>
+</ul>
+
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">springcloud</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+    
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2022/02/01/Feign%E2%80%94%E2%80%94%E6%9B%B4%E4%BC%98%E9%9B%85%E7%9A%84%E8%BF%9C%E7%A8%8B%E8%B0%83%E7%94%A8/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-AOP统一缓存管理" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -467,7 +638,7 @@
 		isTag: false,
 		isCategory: false,
 		open_in_new: true,
-		toc_hide_index: true,
+		toc_hide_index: false,
 		root: "/",
 		innerArchive: true,
 		showTags: true
@@ -551,6 +722,10 @@
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Linux</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">springcloud</a>
               </li>
             
             <div class="clearfix"></div>
