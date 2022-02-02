@@ -10,17 +10,17 @@
   <meta name="generator" content="hexo-theme-yilia-plus">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
-  <meta name="description" content="RestTemplate使用方式12String url &#x3D; &quot;http:&#x2F;&#x2F;userservice&#x2F;user&#x2F;&quot; + order.getUserId();User user &#x3D; restTemplate.getForObject(url, User.class);    存在问题 混入字符串URL的定义，代码可读性差，编程体验不统一 参数复杂的URL难以维护  Feign的使">
+  <meta name="description" content="RestTemplate使用方式12String url &#x3D; &quot;http:&#x2F;&#x2F;userservice&#x2F;user&#x2F;&quot; + order.getUserId();User user &#x3D; restTemplate.getForObject(url, User.class);    存在问题 混入字符串URL的定义，代码可读性差，编程体验不统一 参数复杂的URL难以维护">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Feign——更优雅的远程调用">
 <meta property="og:url" content="http://example.com/2022/02/01/Feign%E2%80%94%E2%80%94%E6%9B%B4%E4%BC%98%E9%9B%85%E7%9A%84%E8%BF%9C%E7%A8%8B%E8%B0%83%E7%94%A8/index.html">
 <meta property="og:site_name" content="City">
-<meta property="og:description" content="RestTemplate使用方式12String url &#x3D; &quot;http:&#x2F;&#x2F;userservice&#x2F;user&#x2F;&quot; + order.getUserId();User user &#x3D; restTemplate.getForObject(url, User.class);    存在问题 混入字符串URL的定义，代码可读性差，编程体验不统一 参数复杂的URL难以维护  Feign的使">
+<meta property="og:description" content="RestTemplate使用方式12String url &#x3D; &quot;http:&#x2F;&#x2F;userservice&#x2F;user&#x2F;&quot; + order.getUserId();User user &#x3D; restTemplate.getForObject(url, User.class);    存在问题 混入字符串URL的定义，代码可读性差，编程体验不统一 参数复杂的URL难以维护">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="http://example.com/2022/02/01/Feign%E2%80%94%E2%80%94%E6%9B%B4%E4%BC%98%E9%9B%85%E7%9A%84%E8%BF%9C%E7%A8%8B%E8%B0%83%E7%94%A8/Feign-1.png">
 <meta property="og:image" content="http://example.com/2022/02/01/Feign%E2%80%94%E2%80%94%E6%9B%B4%E4%BC%98%E9%9B%85%E7%9A%84%E8%BF%9C%E7%A8%8B%E8%B0%83%E7%94%A8/Feign-2.png">
 <meta property="article:published_time" content="2022-02-01T14:04:49.000Z">
-<meta property="article:modified_time" content="2022-02-01T14:32:51.540Z">
+<meta property="article:modified_time" content="2022-02-02T01:43:20.940Z">
 <meta property="article:author" content="City Spring">
 <meta property="article:tag" content="springcloud">
 <meta name="twitter:card" content="summary">
@@ -182,7 +182,7 @@
       <!-- 百度字体平台:http://fontstore.baidu.com/static/editor/index.html -->
       <i class="icon-statistics"></i>
       <span class="post-meta-item-text"> 字数统计:</span>
-      <span class="post-count">767字</span>
+      <span class="post-count">886字</span>
     </span>
   </span>
 
@@ -208,7 +208,7 @@
 
 <h3 id="存在问题"><a href="#存在问题" class="headerlink" title="存在问题"></a>存在问题</h3><ol>
 <li>混入字符串URL的定义，代码可读性差，编程体验不统一</li>
-<li>参数复杂的URL难以维护</li>
+<li>参数复杂的URL难以维护<span id="more"></span></li>
 </ol>
 <h2 id="Feign的使用"><a href="#Feign的使用" class="headerlink" title="Feign的使用"></a>Feign的使用</h2><h3 id="引入依赖"><a href="#引入依赖" class="headerlink" title="引入依赖"></a>引入依赖</h3><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 引入Feign依赖 --&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.cloud<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-cloud-starter-openfeign<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
@@ -286,6 +286,25 @@
 <ul>
 <li>低耦合</li>
 </ul>
+</li>
+</ul>
+<h4 id="抽取补充"><a href="#抽取补充" class="headerlink" title="抽取补充"></a>抽取补充</h4><ul>
+<li><p>实现第二种方法时，项目编译通过，但运行报错，无法找到xxxClient对应的bean</p>
+</li>
+<li><p>引发原因：</p>
+<ul>
+<li>springboot默认扫描启动类所在的目录及以下子目录，feign-api作为依赖被引入，在其他的包目录下，自然无法被扫描</li>
+</ul>
+</li>
+<li><p>解决方式</p>
+<ol>
+<li><p>指定Feign所在的包</p>
+ <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@EnableFeignClients(basePackages = &#x27;city.feign.clients&#x27;)</span> <span class="comment">// 批量扫描</span></span><br></pre></td></tr></table></figure></li>
+<li><p>指定FeignClient的字节码</p>
+ <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@EnableFeignClients(clients = &#123;UserClient.class&#125;)</span>  <span class="comment">// 精准定位</span></span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
 </li>
 </ul>
 
@@ -424,7 +443,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#RestTemplate"><span class="toc-number">1.</span> <span class="toc-text">RestTemplate</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8%E6%96%B9%E5%BC%8F"><span class="toc-number">1.1.</span> <span class="toc-text">使用方式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AD%98%E5%9C%A8%E9%97%AE%E9%A2%98"><span class="toc-number">1.2.</span> <span class="toc-text">存在问题</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Feign%E7%9A%84%E4%BD%BF%E7%94%A8"><span class="toc-number">2.</span> <span class="toc-text">Feign的使用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BC%95%E5%85%A5%E4%BE%9D%E8%B5%96"><span class="toc-number">2.1.</span> <span class="toc-text">引入依赖</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9C%A8%E5%90%AF%E5%8A%A8%E7%B1%BB%E4%B8%8A%E6%B7%BB%E5%8A%A0%E5%8A%9F%E8%83%BD%E5%BC%80%E5%85%B3"><span class="toc-number">2.2.</span> <span class="toc-text">在启动类上添加功能开关</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BC%96%E5%86%99Feign%E5%AE%A2%E6%88%B7%E7%AB%AF%EF%BC%8C%E5%81%9A%E6%8E%A5%E5%8F%A3%E5%A3%B0%E6%98%8E"><span class="toc-number">2.3.</span> <span class="toc-text">编写Feign客户端，做接口声明</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%B0%83%E7%94%A8Feign%E5%AE%A2%E6%88%B7%E7%AB%AF"><span class="toc-number">2.4.</span> <span class="toc-text">调用Feign客户端</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Feign%E5%86%85%E9%83%A8%E9%9B%86%E6%88%90%E4%BA%86%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1"><span class="toc-number">2.5.</span> <span class="toc-text">Feign内部集成了负载均衡</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#ribbon%E5%BC%80%E5%90%AF%E9%A5%A5%E9%A5%BF%E5%8A%A0%E8%BD%BD"><span class="toc-number">2.5.1.</span> <span class="toc-text">ribbon开启饥饿加载</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%87%AA%E5%AE%9A%E4%B9%89Feign%E7%9A%84%E9%85%8D%E7%BD%AE"><span class="toc-number">2.6.</span> <span class="toc-text">自定义Feign的配置</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%96%B9%E5%BC%8F%E4%B8%80%EF%BC%9A%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E6%96%B9%E5%BC%8F"><span class="toc-number">2.6.1.</span> <span class="toc-text">方式一：配置文件方式</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%96%B9%E5%BC%8F%E4%BA%8C%EF%BC%9AJava%E4%BB%A3%E7%A0%81%E6%96%B9%E5%BC%8F"><span class="toc-number">2.6.2.</span> <span class="toc-text">方式二：Java代码方式</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Feign%E7%9A%84%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96"><span class="toc-number">2.7.</span> <span class="toc-text">Feign的性能优化</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E2%91%A0-Feign%E5%BA%95%E5%B1%82%E7%9A%84%E5%AE%A2%E6%88%B7%E7%AB%AF%E5%AE%9E%E7%8E%B0"><span class="toc-number">2.7.1.</span> <span class="toc-text">① Feign底层的客户端实现</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E2%91%A1-%E4%BC%98%E5%8C%96Feign%E7%9A%84%E6%80%A7%E8%83%BD%E4%B8%BB%E8%A6%81%E5%8C%85%E6%8B%AC%EF%BC%9A"><span class="toc-number">2.7.2.</span> <span class="toc-text">② 优化Feign的性能主要包括：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E2%91%A2-%E8%BF%9E%E6%8E%A5%E6%B1%A0%E9%85%8D%E7%BD%AE"><span class="toc-number">2.7.3.</span> <span class="toc-text">③ 连接池配置</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Feign%E7%9A%84%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5"><span class="toc-number">2.8.</span> <span class="toc-text">Feign的最佳实践</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%96%B9%E5%BC%8F%E4%B8%80%EF%BC%88%E7%BB%A7%E6%89%BF%EF%BC%89"><span class="toc-number">2.8.1.</span> <span class="toc-text">方式一（继承）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%96%B9%E5%BC%8F%E4%BA%8C%EF%BC%88%E6%8A%BD%E5%8F%96%EF%BC%89"><span class="toc-number">2.8.2.</span> <span class="toc-text">方式二（抽取）</span></a></li></ol></li></ol></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#RestTemplate"><span class="toc-number">1.</span> <span class="toc-text">RestTemplate</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8%E6%96%B9%E5%BC%8F"><span class="toc-number">1.1.</span> <span class="toc-text">使用方式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AD%98%E5%9C%A8%E9%97%AE%E9%A2%98"><span class="toc-number">1.2.</span> <span class="toc-text">存在问题</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Feign%E7%9A%84%E4%BD%BF%E7%94%A8"><span class="toc-number">2.</span> <span class="toc-text">Feign的使用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BC%95%E5%85%A5%E4%BE%9D%E8%B5%96"><span class="toc-number">2.1.</span> <span class="toc-text">引入依赖</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9C%A8%E5%90%AF%E5%8A%A8%E7%B1%BB%E4%B8%8A%E6%B7%BB%E5%8A%A0%E5%8A%9F%E8%83%BD%E5%BC%80%E5%85%B3"><span class="toc-number">2.2.</span> <span class="toc-text">在启动类上添加功能开关</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BC%96%E5%86%99Feign%E5%AE%A2%E6%88%B7%E7%AB%AF%EF%BC%8C%E5%81%9A%E6%8E%A5%E5%8F%A3%E5%A3%B0%E6%98%8E"><span class="toc-number">2.3.</span> <span class="toc-text">编写Feign客户端，做接口声明</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%B0%83%E7%94%A8Feign%E5%AE%A2%E6%88%B7%E7%AB%AF"><span class="toc-number">2.4.</span> <span class="toc-text">调用Feign客户端</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Feign%E5%86%85%E9%83%A8%E9%9B%86%E6%88%90%E4%BA%86%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1"><span class="toc-number">2.5.</span> <span class="toc-text">Feign内部集成了负载均衡</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#ribbon%E5%BC%80%E5%90%AF%E9%A5%A5%E9%A5%BF%E5%8A%A0%E8%BD%BD"><span class="toc-number">2.5.1.</span> <span class="toc-text">ribbon开启饥饿加载</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%87%AA%E5%AE%9A%E4%B9%89Feign%E7%9A%84%E9%85%8D%E7%BD%AE"><span class="toc-number">2.6.</span> <span class="toc-text">自定义Feign的配置</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%96%B9%E5%BC%8F%E4%B8%80%EF%BC%9A%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E6%96%B9%E5%BC%8F"><span class="toc-number">2.6.1.</span> <span class="toc-text">方式一：配置文件方式</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%96%B9%E5%BC%8F%E4%BA%8C%EF%BC%9AJava%E4%BB%A3%E7%A0%81%E6%96%B9%E5%BC%8F"><span class="toc-number">2.6.2.</span> <span class="toc-text">方式二：Java代码方式</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Feign%E7%9A%84%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96"><span class="toc-number">2.7.</span> <span class="toc-text">Feign的性能优化</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E2%91%A0-Feign%E5%BA%95%E5%B1%82%E7%9A%84%E5%AE%A2%E6%88%B7%E7%AB%AF%E5%AE%9E%E7%8E%B0"><span class="toc-number">2.7.1.</span> <span class="toc-text">① Feign底层的客户端实现</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E2%91%A1-%E4%BC%98%E5%8C%96Feign%E7%9A%84%E6%80%A7%E8%83%BD%E4%B8%BB%E8%A6%81%E5%8C%85%E6%8B%AC%EF%BC%9A"><span class="toc-number">2.7.2.</span> <span class="toc-text">② 优化Feign的性能主要包括：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E2%91%A2-%E8%BF%9E%E6%8E%A5%E6%B1%A0%E9%85%8D%E7%BD%AE"><span class="toc-number">2.7.3.</span> <span class="toc-text">③ 连接池配置</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Feign%E7%9A%84%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5"><span class="toc-number">2.8.</span> <span class="toc-text">Feign的最佳实践</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%96%B9%E5%BC%8F%E4%B8%80%EF%BC%88%E7%BB%A7%E6%89%BF%EF%BC%89"><span class="toc-number">2.8.1.</span> <span class="toc-text">方式一（继承）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%96%B9%E5%BC%8F%E4%BA%8C%EF%BC%88%E6%8A%BD%E5%8F%96%EF%BC%89"><span class="toc-number">2.8.2.</span> <span class="toc-text">方式二（抽取）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%8A%BD%E5%8F%96%E8%A1%A5%E5%85%85"><span class="toc-number">2.8.3.</span> <span class="toc-text">抽取补充</span></a></li></ol></li></ol></li></ol>
                     </div>
                 </span>
             </div>
