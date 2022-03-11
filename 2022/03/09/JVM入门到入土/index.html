@@ -6,21 +6,21 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://chengchun8401.github.io">
-  <title>ThreadLocal——本地线程存储数据 | City</title>
+  <title>JVM入门到入土 | City</title>
   <meta name="generator" content="hexo-theme-yilia-plus">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
-  <meta name="description" content="ThreadLocal 用于当前线程中数据的存放、拿取  常用环境：拦截器中存放信息，controller中直接拿取信息（登录拦截器中存放user信息，controller中获取）">
+  <meta name="description" content="内存结构程序计数器 基本作用：记住下一条JVM指令的执行地址 物理实现：寄存器（CPU中读写速度最快的组件） 特点： 是线程私有的 不会出现内存溢出">
 <meta property="og:type" content="article">
-<meta property="og:title" content="ThreadLocal——本地线程存储数据">
-<meta property="og:url" content="https://chengchun8401.github.io/2022/02/02/ThreadLocal%E2%80%94%E2%80%94%E6%9C%AC%E5%9C%B0%E7%BA%BF%E7%A8%8B%E5%AD%98%E5%82%A8%E6%95%B0%E6%8D%AE/index.html">
+<meta property="og:title" content="JVM入门到入土">
+<meta property="og:url" content="https://chengchun8401.github.io/2022/03/09/JVM%E5%85%A5%E9%97%A8%E5%88%B0%E5%85%A5%E5%9C%9F/index.html">
 <meta property="og:site_name" content="City">
-<meta property="og:description" content="ThreadLocal 用于当前线程中数据的存放、拿取  常用环境：拦截器中存放信息，controller中直接拿取信息（登录拦截器中存放user信息，controller中获取）">
+<meta property="og:description" content="内存结构程序计数器 基本作用：记住下一条JVM指令的执行地址 物理实现：寄存器（CPU中读写速度最快的组件） 特点： 是线程私有的 不会出现内存溢出">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2022-02-02T13:33:37.000Z">
-<meta property="article:modified_time" content="2022-02-02T13:41:31.516Z">
+<meta property="article:published_time" content="2022-03-09T10:57:50.000Z">
+<meta property="article:modified_time" content="2022-03-10T15:17:19.604Z">
 <meta property="article:author" content="City Spring">
-<meta property="article:tag" content="springboot">
+<meta property="article:tag" content="JVM">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="City" type="application/atom+xml">
@@ -146,14 +146,14 @@
               class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-ThreadLocal——本地线程存储数据" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-JVM入门到入土" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
   
   
     <h1 class="article-title" itemprop="name">
-      ThreadLocal——本地线程存储数据
+      JVM入门到入土
     </h1>
   
 
@@ -165,8 +165,8 @@
               <i class="icon-smile icon"></i> 阅读数：<span id="busuanzi_value_page_pv"></span>次
         </span>
 
-<a href="/2022/02/02/ThreadLocal%E2%80%94%E2%80%94%E6%9C%AC%E5%9C%B0%E7%BA%BF%E7%A8%8B%E5%AD%98%E5%82%A8%E6%95%B0%E6%8D%AE/" class="archive-article-date">
-        <time datetime="2022-02-02T13:33:37.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-02-02</time>
+<a href="/2022/03/09/JVM%E5%85%A5%E9%97%A8%E5%88%B0%E5%85%A5%E5%9C%9F/" class="archive-article-date">
+        <time datetime="2022-03-09T10:57:50.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-03-09</time>
 </a>
 
   
@@ -179,7 +179,7 @@
       <!-- 百度字体平台:http://fontstore.baidu.com/static/editor/index.html -->
       <i class="icon-statistics"></i>
       <span class="post-meta-item-text"> 字数统计:</span>
-      <span class="post-count">589字</span>
+      <span class="post-count">437字</span>
     </span>
   </span>
 
@@ -188,7 +188,7 @@
     <span class="post-meta-item-icon">
       <i class="icon-book icon"></i>
       <span class="post-meta-item-text"> 阅读时长≈</span>
-      <span class="post-count">2分</span>
+      <span class="post-count">1分</span>
     </span>
   </span>
 </div>
@@ -199,64 +199,39 @@
   
   <div class="article-entry" itemprop="articleBody">
     
-    <h2 id="ThreadLocal"><a href="#ThreadLocal" class="headerlink" title="ThreadLocal"></a>ThreadLocal</h2><ul>
-<li><p>用于当前线程中数据的存放、拿取</p>
-</li>
-<li><p><strong>常用环境</strong>：拦截器中存放信息，controller中直接拿取信息（登录拦截器中存放user信息，controller中获取）<span id="more"></span></p>
-</li>
-<li><p>```java<br>  public class UserThreadLocal {</p>
-<pre><code>  private UserThreadLocal()&#123;&#125;
-
-  private static final ThreadLocal&lt;SysUser&gt; LOCAL = new ThreadLocal&lt;&gt;();
-
-  public static void put(SysUser sysUser)&#123;
-      LOCAL.set(sysUser);
-  &#125;
-
-  public static SysUser get()&#123;
-      return LOCAL.get();
-  &#125;
-
-  public static void remove()&#123;
-      LOCAL.remove();
-  &#125;
-</code></pre>
-<p>  }</p>
-  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">### 注意事项：用完就删，防止内存泄露</span><br><span class="line"></span><br><span class="line">```java</span><br><span class="line">@Override</span><br><span class="line">public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) throws Exception &#123;</span><br><span class="line">    // 如果不删除 ThreadLocal中用完的信息， 会有内存泄露的风险</span><br><span class="line">    UserThreadLocal.remove();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+    <h2 id="内存结构"><a href="#内存结构" class="headerlink" title="内存结构"></a>内存结构</h2><h3 id="程序计数器"><a href="#程序计数器" class="headerlink" title="程序计数器"></a>程序计数器</h3><ul>
+<li>基本作用：记住下一条JVM指令的执行地址</li>
+<li>物理实现：寄存器（CPU中读写速度最快的组件）</li>
+<li>特点：<ul>
+<li>是线程私有的</li>
+<li>不会出现内存溢出<span id="more"></span></li>
 </ul>
-<h3 id="简述内存泄露"><a href="#简述内存泄露" class="headerlink" title="简述内存泄露"></a>简述内存泄露</h3><ul>
-<li>强引用：一个对象具有强引用，就不会被垃圾回收器回收，就算内存溢出抛异常，也不回收</li>
-<li>弱引用：JVM进行垃圾回收时，无论内存是否充足，都会回收弱引用</li>
-<li>线程Thread为强引用，ThreadLocal为弱引用</li>
-<li>每个线程维护一个ThreadMap，key为ThreadLocal，value为存放的线程变量</li>
-<li>当垃圾回收机制触发，ThreadLocal作为key被回收，就无法在通过这个key获取的对应的value，亦无法进行删除操作，最终积累在线程中，占用大量内存（即内存泄漏）</li>
-</ul>
-<h2 id="线程池（补充）"><a href="#线程池（补充）" class="headerlink" title="线程池（补充）"></a>线程池（补充）</h2><h3 id="线程池的创建"><a href="#线程池的创建" class="headerlink" title="线程池的创建"></a>线程池的创建</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="meta">@EnableAsync</span>  <span class="comment">// 开启多线程</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ThreadPoolConfig</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Bean(&quot;taskExecutor&quot;)</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Executor <span class="title">asyncServiceExecutor</span><span class="params">()</span></span>&#123;</span><br><span class="line">        ThreadPoolTaskExecutor executor = <span class="keyword">new</span> ThreadPoolTaskExecutor();</span><br><span class="line">        <span class="comment">// 设置核心线程数</span></span><br><span class="line">        executor.setCorePoolSize(<span class="number">5</span>);</span><br><span class="line">        <span class="comment">// 设置最大线程数</span></span><br><span class="line">        executor.setMaxPoolSize(<span class="number">20</span>);</span><br><span class="line">        <span class="comment">//配置队列大小</span></span><br><span class="line">        executor.setQueueCapacity(Integer.MAX_VALUE);</span><br><span class="line">        <span class="comment">// 设置线程活跃时间（秒）</span></span><br><span class="line">        executor.setKeepAliveSeconds(<span class="number">60</span>);</span><br><span class="line">        <span class="comment">// 设置默认线程名称</span></span><br><span class="line">        executor.setThreadNamePrefix(<span class="string">&quot;博客项目&quot;</span>);</span><br><span class="line">        <span class="comment">// 等待所有任务结束后再关闭线程池</span></span><br><span class="line">        executor.setWaitForTasksToCompleteOnShutdown(<span class="keyword">true</span>);</span><br><span class="line">        <span class="comment">//执行初始化</span></span><br><span class="line">        executor.initialize();</span><br><span class="line">        <span class="keyword">return</span> executor;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="线程使用"><a href="#线程使用" class="headerlink" title="线程使用"></a>线程使用</h3><ul>
-<li><p>@Async注解</p>
-</li>
-<li><pre><code class="java">  @Async(&quot;taskExecutor&quot;)  // 从线程池中获取线程，不会影响主线程
-  public void updateArticleViewCount(ArticleMapper articleMapper, Article article) &#123;
-      int viewCounts = article.getViewCounts();
-      Article articleUpdate = new Article();
-      article.setViewCounts(viewCounts + 1);
-  
-      LambdaUpdateWrapper&lt;Article&gt; updateWrapper = new LambdaUpdateWrapper&lt;&gt;();
-      updateWrapper.eq(Article::getId,article.getId());
-      // 设置一个 为了在多线程下 保证线程安全的条件   （乐观锁）
-      updateWrapper.eq(Article::getViewCounts, viewCounts);
-  
-      articleMapper.update(article, updateWrapper);
-  &#125;
-</code></pre>
 </li>
 </ul>
-<h2 id="BeanUtils-copyProperties（扩展）"><a href="#BeanUtils-copyProperties（扩展）" class="headerlink" title="BeanUtils.copyProperties（扩展）"></a>BeanUtils.copyProperties（扩展）</h2><ul>
-<li><strong>使用场景：</strong>把从数据库中查到的信息，加工成前端页面显示需要的信息</li>
-<li><strong>注意事项：</strong>相同的属性名，直接复制；属性名不同，则默认为null，需手动填充</li>
+<h3 id="虚拟机栈"><a href="#虚拟机栈" class="headerlink" title="虚拟机栈"></a>虚拟机栈</h3><ul>
+<li>每个线程运行时所有需要的内存，称为虚拟机栈</li>
+<li>每个栈由多个栈帧组成，对应每次方法调用时所占用的内存</li>
+<li>每个线程只能有一个活动栈帧，对应着当前正在执行的方法</li>
+</ul>
+<h4 id="1）问题辨析："><a href="#1）问题辨析：" class="headerlink" title="1）问题辨析："></a>1）问题辨析：</h4><ol>
+<li>垃圾回收是否涉及栈内存？<ul>
+<li>不涉及。栈帧占用的内存在每次调用结束后，会自动释放掉</li>
+</ul>
+</li>
+<li>栈内存分配越大越好吗？<ul>
+<li>根据需求分配内存（**-Xss**1m）</li>
+</ul>
+</li>
+<li>方法内的局部变量是否线程安全？<ul>
+<li>判断一个变量是不是线程安全的，要看是否逃离了方法的作用范围</li>
+</ul>
+</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 方法内的局部变量，线程安全</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">method1</span><span class="params">()</span></span>&#123;</span><br><span class="line">	StringBuilder sb = <span class="keyword">new</span> StringBuilder();</span><br><span class="line">    sb.append(<span class="number">1</span>);</span><br><span class="line">    sb.append(<span class="number">2</span>);</span><br><span class="line">    sb.append(<span class="number">3</span>);</span><br><span class="line">    System.out.println(sb.toString());</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 可能有其他线程同时在修改该StringBuilder对象，不是线程安全的</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">method1</span><span class="params">(StringBuilder sb)</span></span>&#123;</span><br><span class="line">    sb.append(<span class="number">1</span>);</span><br><span class="line">    sb.append(<span class="number">2</span>);</span><br><span class="line">    sb.append(<span class="number">3</span>);</span><br><span class="line">    System.out.println(sb.toString());</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 虽然是局部变量，但作为返回值返回了，有可能被其他线程访问到，不是线程安全的</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> StringBuilder <span class="title">method1</span><span class="params">()</span></span>&#123;</span><br><span class="line">	StringBuilder sb = <span class="keyword">new</span> StringBuilder();</span><br><span class="line">    sb.append(<span class="number">1</span>);</span><br><span class="line">    sb.append(<span class="number">2</span>);</span><br><span class="line">    sb.append(<span class="number">3</span>);</span><br><span class="line">    <span class="keyword">return</span> sb;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 综上，判断一个变量是不是线程安全的，要看是否逃离了方法的作用范围</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="2）栈内存溢出"><a href="#2）栈内存溢出" class="headerlink" title="2）栈内存溢出"></a>2）栈内存溢出</h4><ul>
+<li>栈帧过多导致栈内存溢出（递归）</li>
+<li>栈帧过大导致栈内存溢出（不太现实）  </li>
 </ul>
 
     
@@ -272,7 +247,7 @@
         </li>
         <li>
           <strong>本文链接：</strong>
-          <a href="https://chengchun8401.github.io/2022/02/02/ThreadLocal——本地线程存储数据/" title="ThreadLocal——本地线程存储数据" target="_blank">https://chengchun8401.github.io/2022/02/02/ThreadLocal——本地线程存储数据/</a>
+          <a href="https://chengchun8401.github.io/2022/03/09/JVM入门到入土/" title="JVM入门到入土" target="_blank">https://chengchun8401.github.io/2022/03/09/JVM入门到入土/</a>
         </li>
         
         <li>
@@ -294,7 +269,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">springboot</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">JVM</a>
         		</li>
       		
 		</ul>
@@ -350,7 +325,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-     <!-- <img src="//pan.baidu.com/share/qrcode?url=https://chengchun8401.github.io/2022/02/02/ThreadLocal%E2%80%94%E2%80%94%E6%9C%AC%E5%9C%B0%E7%BA%BF%E7%A8%8B%E5%AD%98%E5%82%A8%E6%95%B0%E6%8D%AE/" alt="微信分享二维码"> -->
+     <!-- <img src="//pan.baidu.com/share/qrcode?url=https://chengchun8401.github.io/2022/03/09/JVM%E5%85%A5%E9%97%A8%E5%88%B0%E5%85%A5%E5%9C%9F/" alt="微信分享二维码"> -->
     </div>
 </div>
 
@@ -365,18 +340,18 @@
 
 <nav id="article-nav">
   
-    <a href="/2022/02/04/mybatis-plus%E4%BB%A3%E7%A0%81%E7%94%9F%E6%88%90%E5%99%A8/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2022/03/09/Java%E9%9D%A2%E8%AF%95%E5%85%AB%E8%82%A1%E6%96%87/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          mybatis-plus代码生成器
+          Java面试八股文
         
       </div>
     </a>
   
   
-    <a href="/2022/02/01/Feign%E2%80%94%E2%80%94%E6%9B%B4%E4%BC%98%E9%9B%85%E7%9A%84%E8%BF%9C%E7%A8%8B%E8%B0%83%E7%94%A8/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">Feign——更优雅的远程调用</div>
+    <a href="/2022/02/27/Gateway%E7%BB%9F%E4%B8%80%E7%BD%91%E5%85%B3/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Gateway统一网关</div>
       <i class="icon-circle-right"></i>
     </a>
   
