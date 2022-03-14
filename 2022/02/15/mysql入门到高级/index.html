@@ -22,8 +22,14 @@
 <meta property="og:image" content="https://chengchun8401.github.io/2022/02/15/mysql%E5%85%A5%E9%97%A8%E5%88%B0%E9%AB%98%E7%BA%A7/DCL%E6%9D%83%E9%99%90.png">
 <meta property="og:image" content="https://chengchun8401.github.io/2022/02/15/mysql%E5%85%A5%E9%97%A8%E5%88%B0%E9%AB%98%E7%BA%A7/%E5%AD%98%E5%82%A8%E5%BC%95%E6%93%8E%E7%89%B9%E7%82%B9.png">
 <meta property="og:image" content="https://chengchun8401.github.io/2022/02/15/mysql%E5%85%A5%E9%97%A8%E5%88%B0%E9%AB%98%E7%BA%A7/B-Tree.png">
+<meta property="og:image" content="https://chengchun8401.github.io/2022/02/15/mysql%E5%85%A5%E9%97%A8%E5%88%B0%E9%AB%98%E7%BA%A7/B+Tree.png">
+<meta property="og:image" content="https://chengchun8401.github.io/2022/02/15/mysql%E5%85%A5%E9%97%A8%E5%88%B0%E9%AB%98%E7%BA%A7/Mysql%E4%B8%ADB+Tree.png">
+<meta property="og:image" content="https://chengchun8401.github.io/2022/02/15/mysql%E5%85%A5%E9%97%A8%E5%88%B0%E9%AB%98%E7%BA%A7/Hash.png">
+<meta property="og:image" content="https://chengchun8401.github.io/2022/02/15/mysql%E5%85%A5%E9%97%A8%E5%88%B0%E9%AB%98%E7%BA%A7/%E7%B4%A2%E5%BC%95%E5%88%86%E7%B1%BB.png">
+<meta property="og:image" content="https://chengchun8401.github.io/2022/02/15/mysql%E5%85%A5%E9%97%A8%E5%88%B0%E9%AB%98%E7%BA%A7/%E5%9B%9E%E8%A1%A8%E6%9F%A5%E8%AF%A2.png">
+<meta property="og:image" content="https://chengchun8401.github.io/2022/02/15/mysql%E5%85%A5%E9%97%A8%E5%88%B0%E9%AB%98%E7%BA%A7/%E6%80%9D%E8%80%83%E9%A2%98.png">
 <meta property="article:published_time" content="2022-02-15T02:57:58.000Z">
-<meta property="article:modified_time" content="2022-03-11T01:43:33.464Z">
+<meta property="article:modified_time" content="2022-03-14T10:21:26.248Z">
 <meta property="article:author" content="City Spring">
 <meta property="article:tag" content="mysql">
 <meta name="twitter:card" content="summary">
@@ -185,7 +191,7 @@
       <!-- 百度字体平台:http://fontstore.baidu.com/static/editor/index.html -->
       <i class="icon-statistics"></i>
       <span class="post-meta-item-text"> 字数统计:</span>
-      <span class="post-count">3.4k字</span>
+      <span class="post-count">4.7k字</span>
     </span>
   </span>
 
@@ -194,7 +200,7 @@
     <span class="post-meta-item-icon">
       <i class="icon-book icon"></i>
       <span class="post-meta-item-text"> 阅读时长≈</span>
-      <span class="post-count">14分</span>
+      <span class="post-count">18分</span>
     </span>
   </span>
 </div>
@@ -583,7 +589,7 @@
 </li>
 </ul>
 <p><img src="/2022/02/15/mysql%E5%85%A5%E9%97%A8%E5%88%B0%E9%AB%98%E7%BA%A7/%E5%AD%98%E5%82%A8%E5%BC%95%E6%93%8E%E7%89%B9%E7%82%B9.png" alt="20220226153220"></p>
-<h3 id="索引"><a href="#索引" class="headerlink" title="索引"></a>索引</h3><h4 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h4><table>
+<h2 id="索引"><a href="#索引" class="headerlink" title="索引"></a>索引</h2><h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><table>
 <thead>
 <tr>
 <th align="center">优势</th>
@@ -599,7 +605,7 @@
 <td align="center">索引大大提高了查询效率，同时却也降低更新表的速度，如INSERT、UPDATE、DELETE</td>
 </tr>
 </tbody></table>
-<h4 id="索引结构"><a href="#索引结构" class="headerlink" title="索引结构"></a>索引结构</h4><table>
+<h3 id="索引结构"><a href="#索引结构" class="headerlink" title="索引结构"></a>索引结构</h3><table>
 <thead>
 <tr>
 <th align="center">索引结构</th>
@@ -625,6 +631,156 @@
 </tbody></table>
 <h4 id="B-Tree"><a href="#B-Tree" class="headerlink" title="B-Tree"></a>B-Tree</h4><p><img src="/2022/02/15/mysql%E5%85%A5%E9%97%A8%E5%88%B0%E9%AB%98%E7%BA%A7/B-Tree.png" alt="20220311092832"></p>
 <p>当插入数据条数大于最大度数时，中间结点向上分裂（<a href="https://www.cs.usfca.edu/~galles/visualization/Algorithms.html" target="_blank">数据结构可视化网站</a>）</p>
+<h4 id="B-Tree-1"><a href="#B-Tree-1" class="headerlink" title="B+Tree"></a>B+Tree</h4><p><img src="/2022/02/15/mysql%E5%85%A5%E9%97%A8%E5%88%B0%E9%AB%98%E7%BA%A7/B+Tree.png" alt="20200311095320"></p>
+<p>所有的元素都会出现在叶子节点，并形成一个单向链表</p>
+<h4 id="B-Tree索引"><a href="#B-Tree索引" class="headerlink" title="B+Tree索引"></a>B+Tree索引</h4><p><img src="/2022/02/15/mysql%E5%85%A5%E9%97%A8%E5%88%B0%E9%AB%98%E7%BA%A7/Mysql%E4%B8%ADB+Tree.png" alt="20220311095923"></p>
+<h4 id="Hash索引"><a href="#Hash索引" class="headerlink" title="Hash索引"></a>Hash索引</h4><p><img src="/2022/02/15/mysql%E5%85%A5%E9%97%A8%E5%88%B0%E9%AB%98%E7%BA%A7/Hash.png" alt="20220313170632"></p>
+<ul>
+<li>特点<ol>
+<li>Hash索引只能用于对等比较(=, in)，不支持范围查询（between，&lt;，&gt;，…）</li>
+<li>无法利用索引完成排序操作</li>
+<li>查询效率高，通常只需要一次检索就可以了，效率通常要高于B+Tree索引</li>
+</ol>
+</li>
+<li>支持<ol>
+<li>在mysql中，支持hash索引的是Memory引擎</li>
+<li>InnoDB具有自适应hash功能，可以根据B+Tree索引在指定条件下转换为hash索引</li>
+</ol>
+</li>
+</ul>
+<h4 id="思考"><a href="#思考" class="headerlink" title="思考"></a>思考</h4><p>为什么InnoDB引擎选择使用B+Tree索引结构？</p>
+<ul>
+<li>相对于二叉树，层级更少，搜索效率高</li>
+<li>对于B-Tree，无论是叶子节点还是非叶子节点，都会保存数据，这样导致一页中存储的键值减少，指针跟着减少，要同样保存大量数据，只能增加树的高度，导致性能降低</li>
+<li>相对hash索引，B+Tree支持范围匹配以及排序操作</li>
+</ul>
+<h3 id="索引分类"><a href="#索引分类" class="headerlink" title="索引分类"></a>索引分类</h3><table>
+<thead>
+<tr>
+<th align="center">分类</th>
+<th align="center">含义</th>
+<th align="center">特点</th>
+<th align="center">关键字</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">主键索引</td>
+<td align="center">针对表中主键创建的索引</td>
+<td align="center">默认自动创建，只能有一个</td>
+<td align="center">PRIMARY</td>
+</tr>
+<tr>
+<td align="center">唯一索引</td>
+<td align="center">避免同一个表中某数据列中的值重复</td>
+<td align="center">可以有多个</td>
+<td align="center">UNIQUE</td>
+</tr>
+<tr>
+<td align="center">常规索引</td>
+<td align="center">快速定位特定数据</td>
+<td align="center">可以有多个</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">全文索引</td>
+<td align="center">全文索引查找的是文本中的关键字，而不是比较索引中的值</td>
+<td align="center">可以有多个</td>
+<td align="center">FULLTEXT</td>
+</tr>
+</tbody></table>
+<p>在InnoDB存储引擎中，根据索引的存储形式，又可以分为以下两种</p>
+<table>
+<thead>
+<tr>
+<th align="center">分类</th>
+<th align="center">含义</th>
+<th align="center">特点</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">聚集索引（Clustered Index）</td>
+<td align="center">将数据存储与索引放到了一块，索引结构的叶子节点保存了行数据</td>
+<td align="center">必须有，而且只能有一个</td>
+</tr>
+<tr>
+<td align="center">二级索引（Secondary Index）</td>
+<td align="center">将数据存储与索引分开，索引结构的叶子节点关联的是对应的主键</td>
+<td align="center">可以存在多个</td>
+</tr>
+</tbody></table>
+<p>聚集索引选取规则：</p>
+<ul>
+<li>如果存在主键，主键索引就是聚集索引</li>
+<li>如果不存在索引，将使用第一个唯一索引（UNIQUE）索引作为聚集索引</li>
+<li>如果表没有主键，或没有合适的唯一索引，则InnoDB会自动生成一个rowId作为隐藏的聚集索引</li>
+</ul>
+<h4 id="示意图"><a href="#示意图" class="headerlink" title="示意图"></a>示意图</h4><p><img src="/2022/02/15/mysql%E5%85%A5%E9%97%A8%E5%88%B0%E9%AB%98%E7%BA%A7/%E7%B4%A2%E5%BC%95%E5%88%86%E7%B1%BB.png" alt="20220314161302"></p>
+<h4 id="回表查询"><a href="#回表查询" class="headerlink" title="回表查询"></a>回表查询</h4><p><img src="/2022/02/15/mysql%E5%85%A5%E9%97%A8%E5%88%B0%E9%AB%98%E7%BA%A7/%E5%9B%9E%E8%A1%A8%E6%9F%A5%E8%AF%A2.png" alt="20220314161321"></p>
+<h4 id="思考题"><a href="#思考题" class="headerlink" title="思考题"></a>思考题</h4><p><img src="/2022/02/15/mysql%E5%85%A5%E9%97%A8%E5%88%B0%E9%AB%98%E7%BA%A7/%E6%80%9D%E8%80%83%E9%A2%98.png" alt="20220314161923"></p>
+<h3 id="索引语法"><a href="#索引语法" class="headerlink" title="索引语法"></a>索引语法</h3><ul>
+<li><p>创建索引</p>
+  <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"># 一个索引可以绑定多个列</span><br><span class="line"># <span class="keyword">UNIQUE</span><span class="operator">|</span>FULLTEXT 如果不填写，默认创建一个常规索引</span><br><span class="line"><span class="keyword">CREATE</span> [<span class="keyword">UNIQUE</span><span class="operator">|</span>FULLTEXT] INDEX index_name <span class="keyword">ON</span> table_name（index_col_name,...）;</span><br></pre></td></tr></table></figure></li>
+<li><p>查看索引</p>
+  <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SHOW</span> INDEX <span class="keyword">FROM</span> table_name;</span><br></pre></td></tr></table></figure></li>
+<li><p>删除索引</p>
+  <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">DROP</span> INDEX index_name <span class="keyword">ON</span> table_name;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h4 id="SQL性能分析"><a href="#SQL性能分析" class="headerlink" title="SQL性能分析"></a>SQL性能分析</h4><ul>
+<li><p>sql执行频率</p>
+  <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># 模糊匹配，七个下划线</span><br><span class="line"><span class="keyword">SHOW</span> <span class="keyword">GLOBAL</span> STATUS <span class="keyword">LIKE</span> <span class="string">&#x27;Com_______&#x27;</span></span><br></pre></td></tr></table></figure></li>
+<li><p>慢查询日志</p>
+  <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"># 开启MySQL慢查询日志的开关</span><br><span class="line">slow_query_log <span class="operator">=</span> <span class="number">1</span></span><br><span class="line"></span><br><span class="line"># 设置慢日志的时间为<span class="number">2</span>秒，<span class="keyword">SQL</span>语句执行时间超过<span class="number">2</span>秒，就会被记录</span><br><span class="line">long_query_time <span class="operator">=</span> <span class="number">2</span></span><br><span class="line"></span><br><span class="line"># 在mysql的配置文件中添加（my.cnf）</span><br></pre></td></tr></table></figure></li>
+<li><p>profile详情</p>
+  <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"># <span class="keyword">show</span> profiles 能够在做<span class="keyword">SQL</span>优化时帮助我们了解时间都耗费到哪里去了</span><br><span class="line"></span><br><span class="line"># 查看当前Mysql是否支持profile操作：</span><br><span class="line"><span class="keyword">SELECT</span> @<span class="variable">@hava</span>_profiling;</span><br><span class="line"></span><br><span class="line"># 默认profiling是关闭的，通过<span class="keyword">set</span>语句开启</span><br><span class="line"><span class="keyword">SET</span> profiling <span class="operator">=</span> <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line"># 查看当前会话中所有<span class="keyword">sql</span>语句的耗时情况</span><br><span class="line"><span class="keyword">show</span> profiles;</span><br><span class="line"></span><br><span class="line"># 查看指定query_id的<span class="keyword">SQL</span>语句各个阶段耗时情况</span><br><span class="line"><span class="keyword">show</span> profile <span class="keyword">for</span> query query_id; </span><br><span class="line"></span><br><span class="line"># 查看指定query_id的<span class="keyword">SQL</span>语句CPU的使用情况</span><br><span class="line"><span class="keyword">show</span> profile cpu <span class="keyword">for</span> query query_id; </span><br></pre></td></tr></table></figure></li>
+<li><p>explain执行计划</p>
+  <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># 直接在<span class="keyword">select</span>语句之前加上关键字 explain <span class="operator">/</span> <span class="keyword">desc</span></span><br><span class="line">EXPLAIN <span class="keyword">SELECT</span> 字段 <span class="keyword">FROM</span> 表名 <span class="keyword">WHERE</span> 条件;</span><br></pre></td></tr></table></figure></li>
+<li><p>EXPLAIN 执行计划各字段含义：</p>
+<ul>
+<li><p>Id</p>
+<p>  select查询的序列号（Id相同，执行顺序从上到下；Id不同，值越大，优先级越高）</p>
+</li>
+<li><p>select_type</p>
+<p>  表示select的类型，SIMPLE（简单表）、PRIMARY（主查询，即最外层的查询）、SUBQUERY（SELECT/WHERE之后包含了子查询）、UNION（UNION中的第二个或者后面的查询语句）</p>
+</li>
+<li><p>type</p>
+<p>  表示连接类型，性能由好到差（NULL、system、const、eq_red、ref、range、index、all）</p>
+<p>  NULL：select ‘A’; （不访问任何表）</p>
+<p>  system：系统表</p>
+<p>  const：主键索引、唯一索引</p>
+<p>  ref：非唯一性索引</p>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="索引使用"><a href="#索引使用" class="headerlink" title="索引使用"></a>索引使用</h3><ul>
+<li>最左前缀法则<ul>
+<li>如果索引了多列（联合索引），要遵守最左前缀法则。最左前缀法则指的是查询从索引最左列开始，并且不跳过索引中的列。</li>
+<li>如果跳跃某一列，索引将部分失效（后面的字段索引失效）</li>
+<li>最左列的字段必须存在，但与摆放顺序无关</li>
+<li>范围查询右边的列，索引会失效（ &gt; 失效，但 &gt;= 不会失效）</li>
+</ul>
+</li>
+<li>索引列运算<ul>
+<li>不要在索引列上进行运算操作，<strong>否则索引将失效</strong></li>
+</ul>
+</li>
+<li>字符串不加引号<ul>
+<li>字符串类型字段使用时，不加引号，索引将失效</li>
+</ul>
+</li>
+<li>模糊查询<ul>
+<li>如果仅仅是尾部模糊匹配（ LIKE ‘软件%’ ），索引不会失效。如果是头部模糊匹配（LIKE ‘%工程’ ），索引失效</li>
+</ul>
+</li>
+<li>or连接的条件<ul>
+<li>用or分隔开的条件，如果or前的条件中的列有索引，而后面的列中没有索引，那么涉及的索引都不会被用到</li>
+</ul>
+</li>
+<li>数据分布影响<ul>
+<li>如果MySQL评估使用索引会比全表扫描更慢，则不会使用索引</li>
+</ul>
+</li>
+</ul>
 
     
 
@@ -770,7 +926,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9F%BA%E7%A1%80"><span class="toc-number">1.</span> <span class="toc-text">基础</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#SQL%E5%88%86%E7%B1%BB"><span class="toc-number">1.1.</span> <span class="toc-text">SQL分类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#DDL"><span class="toc-number">1.2.</span> <span class="toc-text">DDL</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#DML"><span class="toc-number">1.3.</span> <span class="toc-text">DML</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#DQL"><span class="toc-number">1.4.</span> <span class="toc-text">DQL</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#DCL"><span class="toc-number">1.5.</span> <span class="toc-text">DCL</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%87%BD%E6%95%B0"><span class="toc-number">1.6.</span> <span class="toc-text">函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BA%A6%E6%9D%9F"><span class="toc-number">1.7.</span> <span class="toc-text">约束</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A4%9A%E8%A1%A8%E6%9F%A5%E8%AF%A2"><span class="toc-number">1.8.</span> <span class="toc-text">多表查询</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%8B%E7%89%A9"><span class="toc-number">1.9.</span> <span class="toc-text">事物</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BF%9B%E9%98%B6"><span class="toc-number">2.</span> <span class="toc-text">进阶</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AD%98%E5%82%A8%E5%BC%95%E6%93%8E"><span class="toc-number">2.1.</span> <span class="toc-text">存储引擎</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%B4%A2%E5%BC%95"><span class="toc-number">2.2.</span> <span class="toc-text">索引</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%A6%82%E8%BF%B0"><span class="toc-number">2.2.1.</span> <span class="toc-text">概述</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%B4%A2%E5%BC%95%E7%BB%93%E6%9E%84"><span class="toc-number">2.2.2.</span> <span class="toc-text">索引结构</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#B-Tree"><span class="toc-number">2.2.3.</span> <span class="toc-text">B-Tree</span></a></li></ol></li></ol></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9F%BA%E7%A1%80"><span class="toc-number">1.</span> <span class="toc-text">基础</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#SQL%E5%88%86%E7%B1%BB"><span class="toc-number">1.1.</span> <span class="toc-text">SQL分类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#DDL"><span class="toc-number">1.2.</span> <span class="toc-text">DDL</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#DML"><span class="toc-number">1.3.</span> <span class="toc-text">DML</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#DQL"><span class="toc-number">1.4.</span> <span class="toc-text">DQL</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#DCL"><span class="toc-number">1.5.</span> <span class="toc-text">DCL</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%87%BD%E6%95%B0"><span class="toc-number">1.6.</span> <span class="toc-text">函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BA%A6%E6%9D%9F"><span class="toc-number">1.7.</span> <span class="toc-text">约束</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A4%9A%E8%A1%A8%E6%9F%A5%E8%AF%A2"><span class="toc-number">1.8.</span> <span class="toc-text">多表查询</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%8B%E7%89%A9"><span class="toc-number">1.9.</span> <span class="toc-text">事物</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BF%9B%E9%98%B6"><span class="toc-number">2.</span> <span class="toc-text">进阶</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AD%98%E5%82%A8%E5%BC%95%E6%93%8E"><span class="toc-number">2.1.</span> <span class="toc-text">存储引擎</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%B4%A2%E5%BC%95"><span class="toc-number">3.</span> <span class="toc-text">索引</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A6%82%E8%BF%B0"><span class="toc-number">3.1.</span> <span class="toc-text">概述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%B4%A2%E5%BC%95%E7%BB%93%E6%9E%84"><span class="toc-number">3.2.</span> <span class="toc-text">索引结构</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#B-Tree"><span class="toc-number">3.2.1.</span> <span class="toc-text">B-Tree</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#B-Tree-1"><span class="toc-number">3.2.2.</span> <span class="toc-text">B+Tree</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#B-Tree%E7%B4%A2%E5%BC%95"><span class="toc-number">3.2.3.</span> <span class="toc-text">B+Tree索引</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Hash%E7%B4%A2%E5%BC%95"><span class="toc-number">3.2.4.</span> <span class="toc-text">Hash索引</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%80%9D%E8%80%83"><span class="toc-number">3.2.5.</span> <span class="toc-text">思考</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%B4%A2%E5%BC%95%E5%88%86%E7%B1%BB"><span class="toc-number">3.3.</span> <span class="toc-text">索引分类</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%A4%BA%E6%84%8F%E5%9B%BE"><span class="toc-number">3.3.1.</span> <span class="toc-text">示意图</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%9B%9E%E8%A1%A8%E6%9F%A5%E8%AF%A2"><span class="toc-number">3.3.2.</span> <span class="toc-text">回表查询</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%80%9D%E8%80%83%E9%A2%98"><span class="toc-number">3.3.3.</span> <span class="toc-text">思考题</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%B4%A2%E5%BC%95%E8%AF%AD%E6%B3%95"><span class="toc-number">3.4.</span> <span class="toc-text">索引语法</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#SQL%E6%80%A7%E8%83%BD%E5%88%86%E6%9E%90"><span class="toc-number">3.4.1.</span> <span class="toc-text">SQL性能分析</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%B4%A2%E5%BC%95%E4%BD%BF%E7%94%A8"><span class="toc-number">3.5.</span> <span class="toc-text">索引使用</span></a></li></ol></li></ol>
                     </div>
                 </span>
             </div>
