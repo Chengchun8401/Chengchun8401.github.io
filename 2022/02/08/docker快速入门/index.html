@@ -20,7 +20,7 @@
 <meta property="og:image" content="https://chengchun8401.github.io/2022/02/08/docker%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/Dockerfile%E6%8C%87%E4%BB%A4.png">
 <meta property="og:image" content="https://chengchun8401.github.io/2022/02/08/docker%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/%E8%87%AA%E5%AE%9A%E4%B9%89%E9%95%9C%E5%83%8F%E6%80%BB%E7%BB%93.png">
 <meta property="article:published_time" content="2022-02-08T10:21:08.000Z">
-<meta property="article:modified_time" content="2022-02-08T11:27:03.849Z">
+<meta property="article:modified_time" content="2022-04-04T02:36:07.550Z">
 <meta property="article:author" content="City Spring">
 <meta property="article:tag" content="Linux">
 <meta name="twitter:card" content="summary">
@@ -182,7 +182,7 @@
       <!-- 百度字体平台:http://fontstore.baidu.com/static/editor/index.html -->
       <i class="icon-statistics"></i>
       <span class="post-meta-item-text"> 字数统计:</span>
-      <span class="post-count">1.4k字</span>
+      <span class="post-count">1.5k字</span>
     </span>
   </span>
 
@@ -191,7 +191,7 @@
     <span class="post-meta-item-icon">
       <i class="icon-book icon"></i>
       <span class="post-meta-item-text"> 阅读时长≈</span>
-      <span class="post-count">5分</span>
+      <span class="post-count">6分</span>
     </span>
   </span>
 </div>
@@ -326,7 +326,7 @@
 </ul>
 </li>
 </ul>
-<h3 id="Mysql容器的创建"><a href="#Mysql容器的创建" class="headerlink" title="Mysql容器的创建"></a>Mysql容器的创建</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run --name mysql -p 3306:3306 -e MYSQL_ROOT_PASSWORD=root -v /root/mysql/mysql01/conf/hmy.conf:/etc/mysql/conf.d/hmy.conf -v /root/mysql/mysql01/data:/var/lib/mysql -d mysql:5.7.25</span><br></pre></td></tr></table></figure>
+<h3 id="Mysql容器的创建"><a href="#Mysql容器的创建" class="headerlink" title="Mysql容器的创建"></a>Mysql容器的创建</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">docker run --name mysql -p 3306:3306 -e MYSQL_ROOT_PASSWORD=root -v /root/mysql/mysql01/conf/hmy.cnf:/etc/mysql/conf.d/hmy.cnf -v /root/mysql/mysql01/data:/var/lib/mysql -d mysql:5.7.25</span><br><span class="line"></span><br><span class="line"><span class="comment"># mysql的配置文件，包含多个目录（例如: /etc/mysql/conf.d）, 放在该目录中的配置文件会被mysql一并整合加载</span></span><br><span class="line"><span class="comment"># mysql的配置文件中内容过多，我们不做大的更改，因此使用以上方式，导入特定的几项配置</span></span><br></pre></td></tr></table></figure>
 
 
 
