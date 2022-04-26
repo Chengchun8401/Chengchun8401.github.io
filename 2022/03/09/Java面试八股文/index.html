@@ -19,8 +19,9 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://chengchun8401.github.io/2022/03/09/Java%E9%9D%A2%E8%AF%95%E5%85%AB%E8%82%A1%E6%96%87/HashCode%E4%B8%8EEquals.png">
 <meta property="og:image" content="https://chengchun8401.github.io/2022/03/09/Java%E9%9D%A2%E8%AF%95%E5%85%AB%E8%82%A1%E6%96%87/%E8%87%AA%E5%8A%A8%E9%85%8D%E7%BD%AE%E5%8E%9F%E7%90%86.png">
+<meta property="og:image" content="https://chengchun8401.github.io/2022/03/09/Java%E9%9D%A2%E8%AF%95%E5%85%AB%E8%82%A1%E6%96%87/Custom.png">
 <meta property="article:published_time" content="2022-03-09T10:58:31.000Z">
-<meta property="article:modified_time" content="2022-04-12T11:45:23.697Z">
+<meta property="article:modified_time" content="2022-04-26T00:23:06.719Z">
 <meta property="article:author" content="City Spring">
 <meta property="article:tag" content="Java">
 <meta name="twitter:card" content="summary">
@@ -182,7 +183,7 @@
       <!-- 百度字体平台:http://fontstore.baidu.com/static/editor/index.html -->
       <i class="icon-statistics"></i>
       <span class="post-meta-item-text"> 字数统计:</span>
-      <span class="post-count">1.8k字</span>
+      <span class="post-count">2.6k字</span>
     </span>
   </span>
 
@@ -191,7 +192,7 @@
     <span class="post-meta-item-icon">
       <i class="icon-book icon"></i>
       <span class="post-meta-item-text"> 阅读时长≈</span>
-      <span class="post-count">6分</span>
+      <span class="post-count">9分</span>
     </span>
   </span>
 </div>
@@ -351,6 +352,39 @@
 <li>SpringBoot：基于Spring框架，降低了项目搭建的复杂度，简化了开发流程，其核心自动装配、约定大于配置</li>
 </ul>
 <h3 id="十五、SpringBoot自动装配原理"><a href="#十五、SpringBoot自动装配原理" class="headerlink" title="十五、SpringBoot自动装配原理"></a>十五、SpringBoot自动装配原理</h3><p><img src="/2022/03/09/Java%E9%9D%A2%E8%AF%95%E5%85%AB%E8%82%A1%E6%96%87/%E8%87%AA%E5%8A%A8%E9%85%8D%E7%BD%AE%E5%8E%9F%E7%90%86.png" alt="20220412194521"></p>
+<h3 id="十六、对AOP的理解"><a href="#十六、对AOP的理解" class="headerlink" title="十六、对AOP的理解"></a>十六、对AOP的理解</h3><h4 id="简述"><a href="#简述" class="headerlink" title="简述"></a>简述</h4><ul>
+<li>AOP: 面向切面编程，可以说是为了解耦而生的，在业务的隔离上，AOP做到了绝对的解耦</li>
+<li>解耦：降低代码块之间的耦合度，何为耦合呢，牵一发而动全身，当一个业务类的实现逻辑做出改变时，其他一个或多个与之关联的业务类也需要修改对应代码，那么就可以认为这几个业务类的耦合度是比较高的；解耦的实现，类似于封装性的体现，业务逻辑完成编写后，不管你内部实现细节如何改变，我都不受影响，直接调用你暴露出的接口。</li>
+</ul>
+<h4 id="核心概念"><a href="#核心概念" class="headerlink" title="核心概念"></a>核心概念</h4><ul>
+<li>任何一个系统都是有不同组件构成的，每个组件负责特定的功能，而也会存在一些与业务无关的，日志、事物、权限等核心服务组件，这些核心组件经常融入到具体的业务逻辑中，如果为每个业务都添加这样的代码，就会造成代码的冗余，降低了代码的可维护性，因此就可通过AOP，将这些公共的代码逻辑抽象出来，变成一个<strong>切面</strong>，然后通过<strong>切点</strong>注入到<strong>目标对象</strong>（具体业务）中去，通过动态代理的方式，将需要注入切面的对象进行代理，进行调用时，将公共的逻辑添加进去，而不需要修改业务原有的逻辑代码，实现动态增强的目的</li>
+</ul>
+<h4 id="十七、对IOC的理解"><a href="#十七、对IOC的理解" class="headerlink" title="十七、对IOC的理解"></a>十七、对IOC的理解</h4><h4 id="简述-1"><a href="#简述-1" class="headerlink" title="简述"></a>简述</h4><ul>
+<li>自己找对象和通过婚介公司找对象的区别（后者只需要把对象的属性告诉婚介公司，就可以等待其给我们返还复合需求的对象）</li>
+</ul>
+<h4 id="核心概念-1"><a href="#核心概念-1" class="headerlink" title="核心概念"></a>核心概念</h4><ul>
+<li>谁控制谁：在之前的代码编程中，都是自己需要什么对象就去创建什么对象，由程序员控制，有了IOC容器后，则由IOC去控制对象的创建，管理，程序员仅需获取、投入使用</li>
+<li>控制什么：在实现过程中需要的对象以及需要依赖的对象</li>
+<li>什么是反转：没有IOC容器之前，都是在对象中主动去创建需要依赖的对象，这是正转；而有了IOC之后，由IOC去创建所依赖的对象，并注入到对象中，从主动创建到被动接受，这就是反转</li>
+<li>哪些方面被反转：依赖的对象</li>
+</ul>
+<h4 id="十八、对Spring的理解"><a href="#十八、对Spring的理解" class="headerlink" title="十八、对Spring的理解"></a>十八、对Spring的理解</h4><ul>
+<li>Spring是一个框架，是一个容器（IOC），是一个生态（作为最底层的服务支持，为整个Spring全家桶提供了支撑）</li>
+<li>IOC</li>
+<li>AOP</li>
+</ul>
+<h4 id="十九、Java类加载器有哪些"><a href="#十九、Java类加载器有哪些" class="headerlink" title="十九、Java类加载器有哪些"></a>十九、Java类加载器有哪些</h4><h4 id="BootStrap-引导类加载器"><a href="#BootStrap-引导类加载器" class="headerlink" title="BootStrap 引导类加载器"></a>BootStrap 引导类加载器</h4><ul>
+<li>引导类加载器作为虚拟机的一部分，没有父类，主要加载的是JVM自身需要的类，它负责将**<JAVA_HOME>/lib路径下的核心类库<strong>或</strong>-Xbootclasspath参数指定路径下的jar包**加载到内存中</JAVA_HOME></li>
+<li>JVM是按照文件名识别加载jar包的，如 rt.jar ，如果文件名不被虚拟机识别，即使把jar包丢到lib目录下也不会被加载</li>
+</ul>
+<h4 id="Extend-扩展类加载器"><a href="#Extend-扩展类加载器" class="headerlink" title="Extend 扩展类加载器"></a>Extend 扩展类加载器</h4><ul>
+<li><strong>由Java语言实现</strong>，父加载器为null，是Launcher的静态内部类，负责加载**<JAVA_HOME>/lib/ext目录下<strong>或者由系统变量</strong>-Djava.ext.dir指定的路径**中的类库</JAVA_HOME></li>
+</ul>
+<h4 id="Application-系统类加载器"><a href="#Application-系统类加载器" class="headerlink" title="Application 系统类加载器"></a>Application 系统类加载器</h4><h4 id="Custom-自定义加载器"><a href="#Custom-自定义加载器" class="headerlink" title="Custom 自定义加载器"></a>Custom 自定义加载器</h4><ul>
+<li><p>双亲委派加载机制</p>
+<p>  <img src="/2022/03/09/Java%E9%9D%A2%E8%AF%95%E5%85%AB%E8%82%A1%E6%96%87/Custom.png" alt="20220426082212"></p>
+</li>
+</ul>
 
     
 
