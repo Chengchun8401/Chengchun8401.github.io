@@ -6,16 +6,21 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://chengchun8401.github.io">
-  <title>Archives: 2022 | City</title>
+  <title>SpringBoot积累 | City</title>
   <meta name="generator" content="hexo-theme-yilia-plus">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
-  <meta property="og:type" content="website">
-<meta property="og:title" content="City">
-<meta property="og:url" content="https://chengchun8401.github.io/archives/2022/page/2/index.html">
+  <meta name="description" content="一、MapperScan范围定义过大，导致自动装配时出现两个同类型实例12&#x2F;&#x2F; 原范围定义@MapperScan(&quot;com.city.reggie.model&quot;)  12345678910@SpringBootApplication&#x2F;&#x2F; 修改扫描范围，精确到mapper包下@MapperScan(&quot;com.city.reggie.model.*.mapper&amp;quot">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SpringBoot积累">
+<meta property="og:url" content="https://chengchun8401.github.io/2022/05/23/SpringBoot%E7%A7%AF%E7%B4%AF/index.html">
 <meta property="og:site_name" content="City">
+<meta property="og:description" content="一、MapperScan范围定义过大，导致自动装配时出现两个同类型实例12&#x2F;&#x2F; 原范围定义@MapperScan(&quot;com.city.reggie.model&quot;)  12345678910@SpringBootApplication&#x2F;&#x2F; 修改扫描范围，精确到mapper包下@MapperScan(&quot;com.city.reggie.model.*.mapper&amp;quot">
 <meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2022-05-23T14:35:05.000Z">
+<meta property="article:modified_time" content="2022-05-27T13:25:21.938Z">
 <meta property="article:author" content="City Spring">
+<meta property="article:tag" content="springboot">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="City" type="application/atom+xml">
@@ -141,256 +146,102 @@
               class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-SpringBoot积累" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2022" class="archive-year">2022</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	
-<a href="/2022/02/15/mysql%E5%85%A5%E9%97%A8%E5%88%B0%E9%AB%98%E7%BA%A7/" class="archive-article-date">
-        <time datetime="2022-02-15T02:57:58.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-02-15</time>
-</a>
-
-        </div>
-    	 
+      <header class="article-header">
   
-    <h1 itemprop="name">
-	
-	  <a class="archive-article-title" href="/2022/02/15/mysql%E5%85%A5%E9%97%A8%E5%88%B0%E9%AB%98%E7%BA%A7/" target="_blank">mysql入门到高级</a>
   
+    <h1 class="article-title" itemprop="name">
+      SpringBoot积累
     </h1>
   
 
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">mysql</a>
-        		</li>
-      		
-		</ul>
-	</div>
+  
+  
+        
+        <span id="busuanzi_container_page_pv" style='display:none' class="archive-article-date">
+              <i class="icon-smile icon"></i> 阅读数：<span id="busuanzi_value_page_pv"></span>次
+        </span>
 
-          
+<a href="/2022/05/23/SpringBoot%E7%A7%AF%E7%B4%AF/" class="archive-article-date">
+        <time datetime="2022-05-23T14:35:05.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-05-23</time>
+</a>
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
+  
+  
+    
+<div style="margin-top:10px;">
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <!-- fonts.scss -->
+      <!-- 百度字体平台:http://fontstore.baidu.com/static/editor/index.html -->
+      <i class="icon-statistics"></i>
+      <span class="post-meta-item-text"> 字数统计:</span>
+      <span class="post-count">666字</span>
+    </span>
+  </span>
+
+  <span class="post-time">
+    &nbsp; | &nbsp;
+    <span class="post-meta-item-icon">
+      <i class="icon-book icon"></i>
+      <span class="post-meta-item-text"> 阅读时长≈</span>
+      <span class="post-count">3分</span>
+    </span>
+  </span>
+</div>
+
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <h3 id="一、MapperScan范围定义过大，导致自动装配时出现两个同类型实例"><a href="#一、MapperScan范围定义过大，导致自动装配时出现两个同类型实例" class="headerlink" title="一、MapperScan范围定义过大，导致自动装配时出现两个同类型实例"></a>一、MapperScan范围定义过大，导致自动装配时出现两个同类型实例</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 原范围定义</span></span><br><span class="line"><span class="meta">@MapperScan(&quot;com.city.reggie.model&quot;)</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@SpringBootApplication</span></span><br><span class="line"><span class="comment">// 修改扫描范围，精确到mapper包下</span></span><br><span class="line"><span class="meta">@MapperScan(&quot;com.city.reggie.model.*.mapper&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ReggieApplication</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        SpringApplication.run(ReggieApplication.class, args);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="二、文件的上传、下载"><a href="#二、文件的上传、下载" class="headerlink" title="二、文件的上传、下载"></a>二、文件的上传、下载</h3><h4 id="Upload"><a href="#Upload" class="headerlink" title="Upload"></a>Upload</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* </span></span><br><span class="line"><span class="comment">*  在参数列表中添加 MultipartFile</span></span><br><span class="line"><span class="comment">*参数名字不能随便起，须和前端提交表单中的名称保持一致</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="meta">@PostMapping(&quot;/upload&quot;)</span></span><br><span class="line"><span class="meta">@ApiOperation(&quot;文件上传&quot;)</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> Result <span class="title">upload</span><span class="params">(MultipartFile file)</span></span>&#123;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        <span class="comment">// file是临时文件，将其进行转存，避免重复，名称随机</span></span><br><span class="line">        String originalName = file.getOriginalFilename() <span class="comment">// abc.jpg</span></span><br><span class="line">        String suffix = file.getOriginalFilename().substring(originalName.lastIndexOf(<span class="string">&quot;.&quot;</span>)); <span class="comment">// .jpg</span></span><br><span class="line">        String fileName = UUID.randomUUID()toString + suffix; <span class="comment">// random.jpg</span></span><br><span class="line">        </span><br><span class="line">        <span class="comment">// 存放路径不存在则手动创建</span></span><br><span class="line">        File dir = <span class="keyword">new</span> File(basePath);</span><br><span class="line">        <span class="keyword">if</span>(!dir.exists)&#123;</span><br><span class="line">            dir.mkdirs();</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        file.transferTo(<span class="keyword">new</span> File(basePath + fileName));</span><br><span class="line">    &#125; <span class="keyword">catch</span> (IException e) &#123;</span><br><span class="line">        <span class="comment">// 记录到日志</span></span><br><span class="line">            log.error(<span class="string">&quot;=============Exception start=============&quot;</span>);</span><br><span class="line">            log.error(<span class="string">&quot;Exception Msg: &#123;&#125;&quot;</span>, e.toString());</span><br><span class="line">            log.error(<span class="string">&quot;=============Exception end=============&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="download"><a href="#download" class="headerlink" title="download"></a>download</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@GetMapping(&quot;/download&quot;)</span></span><br><span class="line">    <span class="meta">@ApiOperation(&quot;文件下载&quot;)</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">download</span><span class="params">(String name, HttpServletResponse response)</span></span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="comment">// 创建输入流读取文件</span></span><br><span class="line">            FileInputStream fileInputStream = <span class="keyword">new</span> FileInputStream(<span class="keyword">new</span> File(basePath + name));</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 输出流，将文件写回浏览器</span></span><br><span class="line">            ServletOutputStream outputStream = response.getOutputStream();</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 设置回写文件类型</span></span><br><span class="line">            response.setContentType(<span class="string">&quot;image/jpeg&quot;</span>);</span><br><span class="line"></span><br><span class="line">            <span class="keyword">int</span> len = <span class="number">0</span>;</span><br><span class="line">            <span class="keyword">byte</span>[] bytes = <span class="keyword">new</span> <span class="keyword">byte</span>[<span class="number">1024</span>];</span><br><span class="line">            <span class="keyword">while</span>((len = fileInputStream.read(bytes)) != -<span class="number">1</span>)&#123;</span><br><span class="line">                outputStream.write(bytes, <span class="number">0</span>, len);</span><br><span class="line">                outputStream.flush();</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            fileInputStream.close();</span><br><span class="line">            outputStream.close();</span><br><span class="line"></span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            <span class="comment">// 记录到日志</span></span><br><span class="line">            log.error(<span class="string">&quot;=============Exception start=============&quot;</span>);</span><br><span class="line">            log.error(<span class="string">&quot;Exception Msg: &#123;&#125;&quot;</span>, e.toString());</span><br><span class="line">            log.error(<span class="string">&quot;=============Exception end=============&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="三、静态方法调用Autowired注入的对象"><a href="#三、静态方法调用Autowired注入的对象" class="headerlink" title="三、静态方法调用Autowired注入的对象"></a>三、静态方法调用Autowired注入的对象</h3><h4 id="错误写法"><a href="#错误写法" class="headerlink" title="错误写法"></a>错误写法</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Spring无法为静态变量注入依赖，静态变量是属于类的，而不是某一个具体实例，会导致oplogMapper为空</span></span><br><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">LogSave</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> OplogMapper oplogMapper;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">save</span><span class="params">(String model, String operation, String info)</span></span>&#123;</span><br><span class="line">        <span class="comment">// 获取当前操作用户</span></span><br><span class="line">        Admin admin = AdminUtils.getCurrentAdmin();</span><br><span class="line">        oplogMapper.insert(<span class="keyword">new</span> Oplog(<span class="keyword">null</span>, model, operation, info, admin.getId(), LocalDateTime.now()));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="正确写法"><a href="#正确写法" class="headerlink" title="正确写法"></a>正确写法</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">LogSave</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> OplogMapper oplogMapper;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> LogSave logSave;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// @PostConstruct 注解的方法在加载了构造函数之后执行，因此可以使用@PostConstruct注解一个方法来完成初始化</span></span><br><span class="line">    <span class="comment">// @PostConstruct 注解的方法将会在依赖注入完成后被自动调用，执行优先级高于非静态的初始化块，它会在类初始化（类加载的初始化阶段）的时候执行一次，执行完成便销毁，它仅能初始化类变量，即static修饰的数据成员。</span></span><br><span class="line">    <span class="meta">@PostConstruct</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">init</span><span class="params">()</span></span>&#123;</span><br><span class="line">        logSave = <span class="keyword">this</span>;</span><br><span class="line">        logSave.oplogMapper = <span class="keyword">this</span>.oplogMapper;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">save</span><span class="params">(String model, String operation, String info)</span></span>&#123;</span><br><span class="line">        <span class="comment">// 获取当前操作用户</span></span><br><span class="line">        Admin admin = AdminUtils.getCurrentAdmin();</span><br><span class="line">        logSave.oplogMapper.insert(<span class="keyword">new</span> Oplog(<span class="keyword">null</span>, model, operation, info, admin.getId(), LocalDateTime.now()));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+    
+
+    
+
+    
+    <div class="declare"> 
+      <ul class="post-copyright">
+        <li>
+          <strong>本文作者：</strong>
+          City Spring
+        </li>
+        <li>
+          <strong>本文链接：</strong>
+          <a href="https://chengchun8401.github.io/2022/05/23/SpringBoot积累/" title="SpringBoot积累" target="_blank">https://chengchun8401.github.io/2022/05/23/SpringBoot积累/</a>
+        </li>
+        
+        <li>
+          <strong>版权声明： </strong>
+          
+          很高兴我的内容能帮到你
+        </li>
+        
+      </ul>
+    </div>
+    
+
   </div>
-</article>
-  
+  <div class="article-info article-info-index">
     
     
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	
-<a href="/2022/02/14/Security%E4%B8%ADAuthorities%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E5%A4%B1%E8%B4%A5/" class="archive-article-date">
-        <time datetime="2022-02-14T15:09:50.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-02-14</time>
-</a>
-
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-	
-	  <a class="archive-article-title" href="/2022/02/14/Security%E4%B8%ADAuthorities%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E5%A4%B1%E8%B4%A5/" target="_blank">Security中Authorities反序列化失败</a>
-  
-    </h1>
-  
-
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">errors</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	
-<a href="/2022/02/08/RabbitMQ%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/" class="archive-article-date">
-        <time datetime="2022-02-08T11:35:41.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-02-08</time>
-</a>
-
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-	
-	  <a class="archive-article-title" href="/2022/02/08/RabbitMQ%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/" target="_blank">RabbitMQ快速入门</a>
-  
-    </h1>
-  
-
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">RabbitMQ</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	
-<a href="/2022/02/08/docker%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/" class="archive-article-date">
-        <time datetime="2022-02-08T10:21:08.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-02-08</time>
-</a>
-
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-	
-	  <a class="archive-article-title" href="/2022/02/08/docker%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/" target="_blank">docker快速入门</a>
-  
-    </h1>
-  
-
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Linux</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	
-<a href="/2022/02/04/mybatis-plus%E4%BB%A3%E7%A0%81%E7%94%9F%E6%88%90%E5%99%A8/" class="archive-article-date">
-        <time datetime="2022-02-04T12:05:53.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-02-04</time>
-</a>
-
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-	
-	  <a class="archive-article-title" href="/2022/02/04/mybatis-plus%E4%BB%A3%E7%A0%81%E7%94%9F%E6%88%90%E5%99%A8/" target="_blank">mybatis-plus代码生成器</a>
-  
-    </h1>
-  
-
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">mybatis-plus</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	
-<a href="/2022/02/02/ThreadLocal%E2%80%94%E2%80%94%E6%9C%AC%E5%9C%B0%E7%BA%BF%E7%A8%8B%E5%AD%98%E5%82%A8%E6%95%B0%E6%8D%AE/" class="archive-article-date">
-        <time datetime="2022-02-02T13:33:37.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-02-02</time>
-</a>
-
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-	
-	  <a class="archive-article-title" href="/2022/02/02/ThreadLocal%E2%80%94%E2%80%94%E6%9C%AC%E5%9C%B0%E7%BA%BF%E7%A8%8B%E5%AD%98%E5%82%A8%E6%95%B0%E6%8D%AE/" target="_blank">ThreadLocal——本地线程存储数据</a>
-  
-    </h1>
-  
-
-
-        <div class="article-info info-on-right">
-          
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
@@ -402,152 +253,120 @@
 		</ul>
 	</div>
 
-          
+    
 
+    
+
+    
+    
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <!-- <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a> -->
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+     <!-- <img src="//pan.baidu.com/share/qrcode?url=https://chengchun8401.github.io/2022/05/23/SpringBoot%E7%A7%AF%E7%B4%AF/" alt="微信分享二维码"> -->
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+
+    
+    <div class="clearfix"></div>
+  </div>
   </div>
 </article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	
-<a href="/2022/02/01/Feign%E2%80%94%E2%80%94%E6%9B%B4%E4%BC%98%E9%9B%85%E7%9A%84%E8%BF%9C%E7%A8%8B%E8%B0%83%E7%94%A8/" class="archive-article-date">
-        <time datetime="2022-02-01T14:04:49.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-02-01</time>
-</a>
 
+
+<nav id="article-nav">
+  
+  
+    <a href="/2022/04/14/Git%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Git快速入门</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
-  
-    <h1 itemprop="name">
-	
-	  <a class="archive-article-title" href="/2022/02/01/Feign%E2%80%94%E2%80%94%E6%9B%B4%E4%BC%98%E9%9B%85%E7%9A%84%E8%BF%9C%E7%A8%8B%E8%B0%83%E7%94%A8/" target="_blank">Feign——更优雅的远程调用</a>
-  
-    </h1>
-  
-
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">springcloud</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
+        
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%80%E3%80%81MapperScan%E8%8C%83%E5%9B%B4%E5%AE%9A%E4%B9%89%E8%BF%87%E5%A4%A7%EF%BC%8C%E5%AF%BC%E8%87%B4%E8%87%AA%E5%8A%A8%E8%A3%85%E9%85%8D%E6%97%B6%E5%87%BA%E7%8E%B0%E4%B8%A4%E4%B8%AA%E5%90%8C%E7%B1%BB%E5%9E%8B%E5%AE%9E%E4%BE%8B"><span class="toc-number">1.</span> <span class="toc-text">一、MapperScan范围定义过大，导致自动装配时出现两个同类型实例</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E6%96%87%E4%BB%B6%E7%9A%84%E4%B8%8A%E4%BC%A0%E3%80%81%E4%B8%8B%E8%BD%BD"><span class="toc-number">2.</span> <span class="toc-text">二、文件的上传、下载</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Upload"><span class="toc-number">2.1.</span> <span class="toc-text">Upload</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#download"><span class="toc-number">2.2.</span> <span class="toc-text">download</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%89%E3%80%81%E9%9D%99%E6%80%81%E6%96%B9%E6%B3%95%E8%B0%83%E7%94%A8Autowired%E6%B3%A8%E5%85%A5%E7%9A%84%E5%AF%B9%E8%B1%A1"><span class="toc-number">3.</span> <span class="toc-text">三、静态方法调用Autowired注入的对象</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%94%99%E8%AF%AF%E5%86%99%E6%B3%95"><span class="toc-number">3.1.</span> <span class="toc-text">错误写法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%AD%A3%E7%A1%AE%E5%86%99%E6%B3%95"><span class="toc-number">3.2.</span> <span class="toc-text">正确写法</span></a></li></ol></li></ol>
+                    </div>
+                </span>
+            </div>
         </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	
-<a href="/2022/02/01/AOP%E7%BB%9F%E4%B8%80%E7%BC%93%E5%AD%98%E7%AE%A1%E7%90%86/" class="archive-article-date">
-        <time datetime="2022-02-01T10:22:54.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-02-01</time>
-</a>
-
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-	
-	  <a class="archive-article-title" href="/2022/02/01/AOP%E7%BB%9F%E4%B8%80%E7%BC%93%E5%AD%98%E7%AE%A1%E7%90%86/" target="_blank">AOP统一缓存管理</a>
-  
-    </h1>
-  
+        
+    </div>
+</aside>
 
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">springboot</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	
-<a href="/2022/02/01/AOP%E6%97%A5%E5%BF%97%E8%AE%B0%E5%BD%95/" class="archive-article-date">
-        <time datetime="2022-02-01T10:22:39.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-02-01</time>
-</a>
-
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-	
-	  <a class="archive-article-title" href="/2022/02/01/AOP%E6%97%A5%E5%BF%97%E8%AE%B0%E5%BD%95/" target="_blank">AOP日志记录</a>
-  
-    </h1>
-  
 
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">springboot</a>
-        		</li>
-      		
-		</ul>
-	</div>
 
-          
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
 
-    
-    <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/archives/2022/">&amp;laquo; Prev</a><a class="page-number" href="/archives/2022/">1</a><span class="page-number current">2</span>
-    </nav>
-  
+
+
+
+
+
 
 
           </div>
@@ -588,8 +407,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: true,
