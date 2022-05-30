@@ -148,103 +148,6 @@
             
 
   
-    <article id="post-SpringBoot积累" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2022/05/23/SpringBoot%E7%A7%AF%E7%B4%AF/" target="_blank">SpringBoot积累</a>
-  
-    </h1>
-  
-
-
-  
-  
-<a href="/2022/05/23/SpringBoot%E7%A7%AF%E7%B4%AF/" class="archive-article-date">
-        <time datetime="2022-05-23T14:35:05.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-05-23</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <h3 id="一、MapperScan范围定义过大，导致自动装配时出现两个同类型实例"><a href="#一、MapperScan范围定义过大，导致自动装配时出现两个同类型实例" class="headerlink" title="一、MapperScan范围定义过大，导致自动装配时出现两个同类型实例"></a>一、MapperScan范围定义过大，导致自动装配时出现两个同类型实例</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 原范围定义</span></span><br><span class="line"><span class="meta">@MapperScan(&quot;com.city.reggie.model&quot;)</span></span><br></pre></td></tr></table></figure>
-
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@SpringBootApplication</span></span><br><span class="line"><span class="comment">// 修改扫描范围，精确到mapper包下</span></span><br><span class="line"><span class="meta">@MapperScan(&quot;com.city.reggie.model.*.mapper&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ReggieApplication</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        SpringApplication.run(ReggieApplication.class, args);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="二、文件的上传、下载"><a href="#二、文件的上传、下载" class="headerlink" title="二、文件的上传、下载"></a>二、文件的上传、下载</h3><h4 id="Upload"><a href="#Upload" class="headerlink" title="Upload"></a>Upload</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* </span></span><br><span class="line"><span class="comment">*  在参数列表中添加 MultipartFile</span></span><br><span class="line"><span class="comment">*参数名字不能随便起，须和前端提交表单中的名称保持一致</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="meta">@PostMapping(&quot;/upload&quot;)</span></span><br><span class="line"><span class="meta">@ApiOperation(&quot;文件上传&quot;)</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> Result <span class="title">upload</span><span class="params">(MultipartFile file)</span></span>&#123;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        <span class="comment">// file是临时文件，将其进行转存，避免重复，名称随机</span></span><br><span class="line">        String originalName = file.getOriginalFilename() <span class="comment">// abc.jpg</span></span><br><span class="line">        String suffix = file.getOriginalFilename().substring(originalName.lastIndexOf(<span class="string">&quot;.&quot;</span>)); <span class="comment">// .jpg</span></span><br><span class="line">        String fileName = UUID.randomUUID()toString + suffix; <span class="comment">// random.jpg</span></span><br><span class="line">        </span><br><span class="line">        <span class="comment">// 存放路径不存在则手动创建</span></span><br><span class="line">        File dir = <span class="keyword">new</span> File(basePath);</span><br><span class="line">        <span class="keyword">if</span>(!dir.exists)&#123;</span><br><span class="line">            dir.mkdirs();</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        file.transferTo(<span class="keyword">new</span> File(basePath + fileName));</span><br><span class="line">    &#125; <span class="keyword">catch</span> (IException e) &#123;</span><br><span class="line">        <span class="comment">// 记录到日志</span></span><br><span class="line">            log.error(<span class="string">&quot;=============Exception start=============&quot;</span>);</span><br><span class="line">            log.error(<span class="string">&quot;Exception Msg: &#123;&#125;&quot;</span>, e.toString());</span><br><span class="line">            log.error(<span class="string">&quot;=============Exception end=============&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h4 id="download"><a href="#download" class="headerlink" title="download"></a>download</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@GetMapping(&quot;/download&quot;)</span></span><br><span class="line">    <span class="meta">@ApiOperation(&quot;文件下载&quot;)</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">download</span><span class="params">(String name, HttpServletResponse response)</span></span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="comment">// 创建输入流读取文件</span></span><br><span class="line">            FileInputStream fileInputStream = <span class="keyword">new</span> FileInputStream(<span class="keyword">new</span> File(basePath + name));</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 输出流，将文件写回浏览器</span></span><br><span class="line">            ServletOutputStream outputStream = response.getOutputStream();</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 设置回写文件类型</span></span><br><span class="line">            response.setContentType(<span class="string">&quot;image/jpeg&quot;</span>);</span><br><span class="line"></span><br><span class="line">            <span class="keyword">int</span> len = <span class="number">0</span>;</span><br><span class="line">            <span class="keyword">byte</span>[] bytes = <span class="keyword">new</span> <span class="keyword">byte</span>[<span class="number">1024</span>];</span><br><span class="line">            <span class="keyword">while</span>((len = fileInputStream.read(bytes)) != -<span class="number">1</span>)&#123;</span><br><span class="line">                outputStream.write(bytes, <span class="number">0</span>, len);</span><br><span class="line">                outputStream.flush();</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            fileInputStream.close();</span><br><span class="line">            outputStream.close();</span><br><span class="line"></span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            <span class="comment">// 记录到日志</span></span><br><span class="line">            log.error(<span class="string">&quot;=============Exception start=============&quot;</span>);</span><br><span class="line">            log.error(<span class="string">&quot;Exception Msg: &#123;&#125;&quot;</span>, e.toString());</span><br><span class="line">            log.error(<span class="string">&quot;=============Exception end=============&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="三、静态方法调用Autowired注入的对象"><a href="#三、静态方法调用Autowired注入的对象" class="headerlink" title="三、静态方法调用Autowired注入的对象"></a>三、静态方法调用Autowired注入的对象</h3><h4 id="错误写法"><a href="#错误写法" class="headerlink" title="错误写法"></a>错误写法</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Spring无法为静态变量注入依赖，静态变量是属于类的，而不是某一个具体实例，会导致oplogMapper为空</span></span><br><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">LogSave</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> OplogMapper oplogMapper;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">save</span><span class="params">(String model, String operation, String info)</span></span>&#123;</span><br><span class="line">        <span class="comment">// 获取当前操作用户</span></span><br><span class="line">        Admin admin = AdminUtils.getCurrentAdmin();</span><br><span class="line">        oplogMapper.insert(<span class="keyword">new</span> Oplog(<span class="keyword">null</span>, model, operation, info, admin.getId(), LocalDateTime.now()));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h4 id="正确写法"><a href="#正确写法" class="headerlink" title="正确写法"></a>正确写法</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">LogSave</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> OplogMapper oplogMapper;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> LogSave logSave;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// @PostConstruct 注解的方法在加载了构造函数之后执行，因此可以使用@PostConstruct注解一个方法来完成初始化</span></span><br><span class="line">    <span class="comment">// @PostConstruct 注解的方法将会在依赖注入完成后被自动调用，执行优先级高于非静态的初始化块，它会在类初始化（类加载的初始化阶段）的时候执行一次，执行完成便销毁，它仅能初始化类变量，即static修饰的数据成员。</span></span><br><span class="line">    <span class="meta">@PostConstruct</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">init</span><span class="params">()</span></span>&#123;</span><br><span class="line">        logSave = <span class="keyword">this</span>;</span><br><span class="line">        logSave.oplogMapper = <span class="keyword">this</span>.oplogMapper;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">save</span><span class="params">(String model, String operation, String info)</span></span>&#123;</span><br><span class="line">        <span class="comment">// 获取当前操作用户</span></span><br><span class="line">        Admin admin = AdminUtils.getCurrentAdmin();</span><br><span class="line">        logSave.oplogMapper.insert(<span class="keyword">new</span> Oplog(<span class="keyword">null</span>, model, operation, info, admin.getId(), LocalDateTime.now()));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">springboot</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2022/05/23/SpringBoot%E7%A7%AF%E7%B4%AF/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
     <article id="post-Git快速入门" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -628,6 +531,98 @@
     
     <p class="article-more-link">
       <a class="article-more-a" href="/2022/03/29/SpringBoot%E5%8E%9F%E7%90%86%E4%BA%86%E8%A7%A3/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-SpringBoot积累" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+  
+  
+    <h1 itemprop="name">
+	
+	  <a class="article-title" href="/2022/03/23/SpringBoot%E7%A7%AF%E7%B4%AF/" target="_blank">SpringBoot积累</a>
+  
+    </h1>
+  
+
+
+  
+  
+<a href="/2022/03/23/SpringBoot%E7%A7%AF%E7%B4%AF/" class="archive-article-date">
+        <time datetime="2022-03-23T14:35:05.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-03-23</time>
+</a>
+
+  
+  
+    
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <h3 id="一、MapperScan范围定义过大，导致自动装配时出现两个同类型实例"><a href="#一、MapperScan范围定义过大，导致自动装配时出现两个同类型实例" class="headerlink" title="一、MapperScan范围定义过大，导致自动装配时出现两个同类型实例"></a>一、MapperScan范围定义过大，导致自动装配时出现两个同类型实例</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 原范围定义</span></span><br><span class="line"><span class="meta">@MapperScan(&quot;com.city.reggie.model&quot;)</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@SpringBootApplication</span></span><br><span class="line"><span class="comment">// 修改扫描范围，精确到mapper包下</span></span><br><span class="line"><span class="meta">@MapperScan(&quot;com.city.reggie.model.*.mapper&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ReggieApplication</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        SpringApplication.run(ReggieApplication.class, args);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="二、文件的上传、下载"><a href="#二、文件的上传、下载" class="headerlink" title="二、文件的上传、下载"></a>二、文件的上传、下载</h3>
+    
+    <a class="article-more-a" href="/2022/03/23/SpringBoot%E7%A7%AF%E7%B4%AF/#more">more >></a>
+    
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">springboot</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+    
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2022/03/23/SpringBoot%E7%A7%AF%E7%B4%AF/">展开全文 >></a>
     </p>
     
 
