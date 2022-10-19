@@ -20,6 +20,7 @@
 <meta property="og:image" content="https://chengchun8401.github.io/2022/02/15/mysql%E5%85%A5%E9%97%A8%E5%88%B0%E9%AB%98%E7%BA%A7/SQL%E5%88%86%E7%B1%BB.png">
 <meta property="og:image" content="https://chengchun8401.github.io/2022/02/15/mysql%E5%85%A5%E9%97%A8%E5%88%B0%E9%AB%98%E7%BA%A7/DQL%E6%89%A7%E8%A1%8C%E9%A1%BA%E5%BA%8F.png">
 <meta property="og:image" content="https://chengchun8401.github.io/2022/02/15/mysql%E5%85%A5%E9%97%A8%E5%88%B0%E9%AB%98%E7%BA%A7/DCL%E6%9D%83%E9%99%90.png">
+<meta property="og:image" content="https://chengchun8401.github.io/2022/02/15/mysql%E5%85%A5%E9%97%A8%E5%88%B0%E9%AB%98%E7%BA%A7/InnoDB%E9%80%BB%E8%BE%91%E5%AD%98%E5%82%A8%E7%BB%93%E6%9E%84.png">
 <meta property="og:image" content="https://chengchun8401.github.io/2022/02/15/mysql%E5%85%A5%E9%97%A8%E5%88%B0%E9%AB%98%E7%BA%A7/%E5%AD%98%E5%82%A8%E5%BC%95%E6%93%8E%E7%89%B9%E7%82%B9.png">
 <meta property="og:image" content="https://chengchun8401.github.io/2022/02/15/mysql%E5%85%A5%E9%97%A8%E5%88%B0%E9%AB%98%E7%BA%A7/B-Tree.png">
 <meta property="og:image" content="https://chengchun8401.github.io/2022/02/15/mysql%E5%85%A5%E9%97%A8%E5%88%B0%E9%AB%98%E7%BA%A7/B+Tree.png">
@@ -35,7 +36,7 @@
 <meta property="og:image" content="https://chengchun8401.github.io/2022/02/15/mysql%E5%85%A5%E9%97%A8%E5%88%B0%E9%AB%98%E7%BA%A7/%E7%BC%93%E5%86%B2%E6%B1%A0.png">
 <meta property="og:image" content="https://chengchun8401.github.io/2022/02/15/mysql%E5%85%A5%E9%97%A8%E5%88%B0%E9%AB%98%E7%BA%A7/%E6%97%A5%E5%BF%97%E7%BC%93%E5%86%B2%E5%8C%BA.png">
 <meta property="article:published_time" content="2022-02-15T02:57:58.000Z">
-<meta property="article:modified_time" content="2022-04-26T01:28:05.523Z">
+<meta property="article:modified_time" content="2022-07-15T13:38:38.629Z">
 <meta property="article:author" content="City Spring">
 <meta property="article:tag" content="mysql">
 <meta name="twitter:card" content="summary">
@@ -197,7 +198,7 @@
       <!-- 百度字体平台:http://fontstore.baidu.com/static/editor/index.html -->
       <i class="icon-statistics"></i>
       <span class="post-meta-item-text"> 字数统计:</span>
-      <span class="post-count">9.1k字</span>
+      <span class="post-count">9.2k字</span>
     </span>
   </span>
 
@@ -554,7 +555,7 @@
 </li>
 </ul>
 <h3 id="多表查询"><a href="#多表查询" class="headerlink" title="多表查询"></a>多表查询</h3><ul>
-<li><p>内连接</p>
+<li><p>内连接<strong>【求交集】</strong></p>
   <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 隐式内连接</span></span><br><span class="line"><span class="keyword">SELECT</span> 字段列表 <span class="keyword">FROM</span> 表<span class="number">1</span>,表<span class="number">2</span> <span class="keyword">WHERE</span> 条件...;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 显式内连接</span></span><br><span class="line"><span class="keyword">SELECT</span> 字段列表 <span class="keyword">FROM</span> 表<span class="number">1</span> [<span class="keyword">INNER</span>] <span class="keyword">JOIN</span> 表<span class="number">2</span> <span class="keyword">ON</span> 连接条件...;</span><br></pre></td></tr></table></figure></li>
 <li><p>外连接</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 左外连接 相当于查询表1(左表)的所有数据 包含 表1、表2交集部分的数据</span></span><br><span class="line"><span class="keyword">SELECT</span> 字段列表 <span class="keyword">FROM</span> 表<span class="number">1</span> <span class="keyword">LEFT</span> [<span class="keyword">OUTER</span>]  <span class="keyword">JOIN</span> 表<span class="number">2</span> <span class="keyword">ON</span> 条件</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 右外连接 相当于查询表2(右表)的所有数据 包含 表1、表2交集部分的数据</span></span><br><span class="line"><span class="keyword">SELECT</span> 字段列表 <span class="keyword">FROM</span> 表<span class="number">1</span> <span class="keyword">RIGHT</span> [<span class="keyword">OUTER</span>] <span class="keyword">JOIN</span> 表<span class="number">2</span> <span class="keyword">ON</span> 条件</span><br></pre></td></tr></table></figure></li>
@@ -580,22 +581,44 @@
   <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 查看事物隔离级别</span></span><br><span class="line"><span class="keyword">SELECT</span> @<span class="variable">@TRANSACTION</span>_ISOLATION;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 设置事物隔离级别</span></span><br><span class="line"><span class="keyword">SET</span> [SESSION<span class="operator">|</span><span class="keyword">GLOBAL</span>] TRANSACTION ISOLATION LEVEL &#123;READ UNCOMMITTED<span class="operator">|</span>READ COMMITTED<span class="operator">|</span>REPEATABLE READ<span class="operator">|</span>SERIALIZABLE&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- READ UNCOMMITTED  可能出现：脏读、不可重复读、幻读</span></span><br><span class="line"><span class="comment">-- READ COMMITTED 可能出现：不可重复读、幻读</span></span><br><span class="line"><span class="comment">-- REPEATABLE READ（默认） 可能出现：幻读</span></span><br><span class="line"><span class="comment">-- SERIALIZABLE 都不会出现</span></span><br></pre></td></tr></table></figure></li>
 </ul>
 <h2 id="存储引擎"><a href="#存储引擎" class="headerlink" title="存储引擎"></a>存储引擎</h2><ul>
-<li>innoDB（MySQL 5.5 后的默认引擎）<ol>
+<li><p>innoDB（MySQL 5.5 后的默认引擎）</p>
+<p><strong>特点</strong></p>
+<ol>
 <li>DML操作遵循ACID，支持事物</li>
 <li>行级锁，提高并发访问性能</li>
 <li>支持外键约束，保证数据的完整性和正确性</li>
 </ol>
+<p><strong>扩展</strong></p>
+<ol>
+<li><p>表结构及数据以ibd的文件格式存放在磁盘中</p>
+<p> <img src="/2022/02/15/mysql%E5%85%A5%E9%97%A8%E5%88%B0%E9%AB%98%E7%BA%A7/InnoDB%E9%80%BB%E8%BE%91%E5%AD%98%E5%82%A8%E7%BB%93%E6%9E%84.png" alt="20220715211520"></p>
 </li>
-<li>MyISAM<ol>
+</ol>
+</li>
+<li><p>MyISAM</p>
+<p>  <strong>特点</strong></p>
+<ol>
 <li>不支持事物，不支持外键</li>
 <li>支持表锁，不支持行锁</li>
 <li>访问速度快</li>
 </ol>
+<p>  <strong>选择</strong></p>
+<ul>
+<li>如果应用是以读数据和插入为主，很少进行更新和删除操作，并且对事物的完整性、并发性要求并不高，那么选择MyISAM是比较合适的</li>
+<li>如日志、足迹、评论</li>
+<li>被MongoDB替代</li>
+</ul>
 </li>
-<li>Memory<ol>
+<li><p>Memory</p>
+<p>  <strong>特点</strong></p>
+<ol>
 <li>内存存放（访问速度快，用于缓存或临时表）</li>
 <li>hash索引（默认）</li>
 </ol>
+<p>  <strong>选择</strong></p>
+<ul>
+<li>被Redis替代</li>
+</ul>
 </li>
 </ul>
 <p><img src="/2022/02/15/mysql%E5%85%A5%E9%97%A8%E5%88%B0%E9%AB%98%E7%BA%A7/%E5%AD%98%E5%82%A8%E5%BC%95%E6%93%8E%E7%89%B9%E7%82%B9.png" alt="20220226153220"></p>
