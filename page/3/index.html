@@ -148,191 +148,6 @@
             
 
   
-    <article id="post-ThreadLocal——本地线程存储数据" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2022/02/02/ThreadLocal%E2%80%94%E2%80%94%E6%9C%AC%E5%9C%B0%E7%BA%BF%E7%A8%8B%E5%AD%98%E5%82%A8%E6%95%B0%E6%8D%AE/" target="_blank">ThreadLocal——本地线程存储数据</a>
-  
-    </h1>
-  
-
-
-  
-  
-<a href="/2022/02/02/ThreadLocal%E2%80%94%E2%80%94%E6%9C%AC%E5%9C%B0%E7%BA%BF%E7%A8%8B%E5%AD%98%E5%82%A8%E6%95%B0%E6%8D%AE/" class="archive-article-date">
-        <time datetime="2022-02-02T13:33:37.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-02-02</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <h2 id="ThreadLocal"><a href="#ThreadLocal" class="headerlink" title="ThreadLocal"></a>ThreadLocal</h2><ul>
-<li><p>用于当前线程中数据的存放、拿取</p>
-</li>
-<li><p><strong>常用环境</strong>：拦截器中存放信息，controller中直接拿取信息（登录拦截器中存放user信息，controller中获取）</p></li></ul>
-    
-    <a class="article-more-a" href="/2022/02/02/ThreadLocal%E2%80%94%E2%80%94%E6%9C%AC%E5%9C%B0%E7%BA%BF%E7%A8%8B%E5%AD%98%E5%82%A8%E6%95%B0%E6%8D%AE/#more">more >></a>
-    
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">springboot</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2022/02/02/ThreadLocal%E2%80%94%E2%80%94%E6%9C%AC%E5%9C%B0%E7%BA%BF%E7%A8%8B%E5%AD%98%E5%82%A8%E6%95%B0%E6%8D%AE/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Feign——更优雅的远程调用" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2022/02/01/Feign%E2%80%94%E2%80%94%E6%9B%B4%E4%BC%98%E9%9B%85%E7%9A%84%E8%BF%9C%E7%A8%8B%E8%B0%83%E7%94%A8/" target="_blank">Feign——更优雅的远程调用</a>
-  
-    </h1>
-  
-
-
-  
-  
-<a href="/2022/02/01/Feign%E2%80%94%E2%80%94%E6%9B%B4%E4%BC%98%E9%9B%85%E7%9A%84%E8%BF%9C%E7%A8%8B%E8%B0%83%E7%94%A8/" class="archive-article-date">
-        <time datetime="2022-02-01T14:04:49.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-02-01</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <h2 id="RestTemplate"><a href="#RestTemplate" class="headerlink" title="RestTemplate"></a>RestTemplate</h2><h3 id="使用方式"><a href="#使用方式" class="headerlink" title="使用方式"></a>使用方式</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">String url = <span class="string">&quot;http://userservice/user/&quot;</span> + order.getUserId();</span><br><span class="line">User user = restTemplate.getForObject(url, User.class);</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="存在问题"><a href="#存在问题" class="headerlink" title="存在问题"></a>存在问题</h3><ol>
-<li>混入字符串URL的定义，代码可读性差，编程体验不统一</li>
-<li>参数复杂的URL难以维护</li></ol>
-    
-    <a class="article-more-a" href="/2022/02/01/Feign%E2%80%94%E2%80%94%E6%9B%B4%E4%BC%98%E9%9B%85%E7%9A%84%E8%BF%9C%E7%A8%8B%E8%B0%83%E7%94%A8/#more">more >></a>
-    
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">springcloud</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2022/02/01/Feign%E2%80%94%E2%80%94%E6%9B%B4%E4%BC%98%E9%9B%85%E7%9A%84%E8%BF%9C%E7%A8%8B%E8%B0%83%E7%94%A8/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
     <article id="post-AOP统一缓存管理" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -612,7 +427,7 @@
   <div class="outer">
     <div id="footer-info">
     	<div class="footer-left">
-    		&copy; 2022-2023 <a href="https://chengchun8401.github.io/" target="_blank">City Spring</a>
+    		&copy; 2022-2024 <a href="https://chengchun8401.github.io/" target="_blank">City Spring</a>
     	</div>
       	<div class="footer-right">
 			
@@ -710,11 +525,7 @@
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">springboot</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Linux</a>
+                <a href="javascript:void(0)" class="js-tag color4">AOP</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -722,23 +533,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">mybatis-plus</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">RabbitMQ</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">errors</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">mysql</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">git</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">JUC</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -750,7 +549,15 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">JUC</a>
+                <a href="javascript:void(0)" class="js-tag color2">errors</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">springboot</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">RabbitMQ</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -758,7 +565,15 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">AOP</a>
+                <a href="javascript:void(0)" class="js-tag color1">Linux</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">mybatis-plus</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">mysql</a>
               </li>
             
             <div class="clearfix"></div>
